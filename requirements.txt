@@ -1,3 +1,4 @@
 flet==0.21.1
 requests
-json
+urllib3
+orjson
