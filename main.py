@@ -27,12 +27,14 @@ def main(page):
 
     page.scroll = 'always'
     page.title = 'Aplicativo Luarco'
+    
+    '''
     page.window_title_bar_hidden = False
     page.window_frameless = False
-    page.window_width = 440
+    # page.window_width = 440
     page.window_height = 500
     page.window_always_on_top = False
-
+    '''
 
     def fazer_reqs(pagina, seller_sku, access_token_var):
         id_do_vendedor = access_token_var[-9:]
@@ -228,4 +230,4 @@ def main(page):
     page.add(inicio, access_token_label, valores, botoes, msg_erro, lista)
 
 
-ft.app(target=main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
