@@ -115,8 +115,9 @@ def main(page):
             pr.opacity = 100
             
             page.update()
-            retorno = fazer_reqs(0, sku, access_token)  # pega 50 produtos
             limpar()
+            retorno = fazer_reqs(0, sku, access_token)  # pega 50 produtos
+            
 
             if retorno == 400:
                 page.update()
