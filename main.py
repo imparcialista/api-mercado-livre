@@ -39,7 +39,8 @@ def main(page):
         url = (f'https://api.mercadolibre.com/users/'
                f'{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset='
                f'{pagina}')
-        headers = { 'Authorization': f'Bearer {access_token_var}' }
+        headers = { 'Authorization': f'Bearer {access_token_var}',
+            }
         resposta = requests.request('GET', url, headers=headers)
         if resposta.status_code == 200:
             resposta = resposta.json()
@@ -67,6 +68,7 @@ def main(page):
             payload = json.dumps({ 'price': valor_atualizar })
 
         headers = {
+            'Acces-Control-Allow-Origin': 'https://api-mercado-livre.pages.dev',
             'Authorization': f'Bearer {access_token_var}',
             'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
