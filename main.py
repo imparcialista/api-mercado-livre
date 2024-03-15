@@ -45,12 +45,12 @@ def main(page):
 
         if resposta.status == 200:
             resposta = resposta.json()
-            print(resposta)
+            #print(resposta)
             return resposta
         
         else:
             resposta.json()
-            print(resposta)
+            #print(resposta)
             msg_erro.value = 'Falha na requisição, altere os valores'
             sku_mlb.value = ''
             qtd_mlb.value = ''
@@ -73,7 +73,12 @@ def main(page):
             resp = requests.request(method="POST", url="https://api.mercadolibre.com/items/{produto}", body=ativar, headers=headers)
         else:
             resp = requests.request(method="POST", url="https://api.mercadolibre.com/items/{produto}", body=desativar, headers=headers)
-            
+        
+        #resp = resp.json()
+
+
+        resp = (orjson.loads(resp.data)["json"])
+
         if resp.status != 200:
             retorno = f'{produto} | Não pode ser alterado'
             txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
