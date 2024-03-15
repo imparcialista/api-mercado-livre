@@ -39,14 +39,16 @@ def main(page):
         url = (f'https://api.mercadolibre.com/users/'
                f'{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset='
                f'{pagina}')
-
-        payload = { }
         headers = { 'Authorization': f'Bearer {access_token_var}' }
-        resposta = requests.request('GET', url, headers=headers, data=payload)
+        resposta = requests.request('GET', url, headers=headers)
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
         else:
+            msg_erro.value = 'Falha na requisição, altere os valores'
+            qtd_mlb.value = ''
+            prc_mlb.value = ''
+            page.update()
             erro = 400
             return erro
 
