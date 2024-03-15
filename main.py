@@ -1,6 +1,8 @@
 import flet as ft
-import requests
-import json
+import urllib3 as requests
+import orjson
+
+
 
 
 def main(page):
@@ -35,14 +37,20 @@ def main(page):
                f'{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset='
                f'{pagina}')
 
-        payload = { }
+   
         headers = { 'Authorization': f'Bearer {access_token_var}' }
-        resposta = requests.request('GET', url, headers=headers, data=payload, timeout=60)
-        if resposta.status_code == 200:
+
+        resposta = requests.request('GET', url, headers=headers)
+        
+
+        if resposta.status == 200:
             resposta = resposta.json()
+            print(resposta)
             return resposta
         
         else:
+            resposta.json()
+            print(resposta)
             msg_erro.value = 'Falha na requisição, altere os valores'
             sku_mlb.value = ''
             qtd_mlb.value = ''
@@ -52,20 +60,21 @@ def main(page):
 
 
     def atualizar_estoque(produto, quantidade, access_token_var):
-        url = f'https://api.mercadolibre.com/items/{produto}'
-        if quantidade > 0:
-            payload = json.dumps({ 'available_quantity': quantidade, 'status': 'active' })
-        else:
-            payload = json.dumps({ 'available_quantity': quantidade })
-
-        headers = {
+        headers={
             'Authorization': f'Bearer {access_token_var}',
             'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.request('PUT', url, headers=headers, data=payload, timeout=60)
-        if resposta.status_code != 200:
+        ativar = orjson.dumps({ 'available_quantity': quantidade, 'status': 'active' })
+        desativar = orjson.dumps({ 'available_quantity': quantidade})
+        
+        if quantidade > 0:
+            resp = requests.request(method="POST", url="https://api.mercadolibre.com/items/{produto}", body=ativar, headers=headers)
+        else:
+            resp = requests.request(method="POST", url="https://api.mercadolibre.com/items/{produto}", body=desativar, headers=headers)
+            
+        if resp.status != 200:
             retorno = f'{produto} | Não pode ser alterado'
             txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
 
@@ -137,7 +146,7 @@ def main(page):
                             paginas += 1
 
                         for pagina in range(paginas):
-                            retorno = fazer_reqs(pagina * 50, sku, access_token)
+                            retorno = fazer_reqs((pagina * 50), sku, access_token)
                             for produto in retorno['results']:
                                 escrever = atualizar_estoque(produto, qtd, access_token)
                                 lista_resultado.controls.append(escrever)
