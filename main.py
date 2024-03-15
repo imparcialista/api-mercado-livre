@@ -113,11 +113,10 @@ def main(page):
             botoes.disabled = True
             c.disabled = True
             pr.opacity = 100
-            limpar()
-
-
+            
             page.update()
             retorno = fazer_reqs(0, sku, access_token)  # pega 50 produtos
+            limpar()
 
             if retorno == 400:
                 page.update()
