@@ -27,7 +27,7 @@ def main(page):
 
     page.scroll = 'always'
     page.title = 'Aplicativo Luarco'
-    
+
     '''
     page.window_title_bar_hidden = False
     page.window_frameless = False
@@ -70,7 +70,7 @@ def main(page):
             payload = json.dumps({ 'price': valor_atualizar })
 
         headers = {
-            'Acces-Control-Allow-Origin': 'https://api-mercado-livre.pages.dev',
+            'Access-Control-Allow-Origin': 'https://api-mercado-livre.pages.dev',
             'Authorization': f'Bearer {access_token_var}',
             'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
