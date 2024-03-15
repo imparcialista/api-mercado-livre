@@ -185,4 +185,4 @@ def main(page):
     lista = ft.ListView(expand=False, spacing=10)
     page.add(inicio, access_token_label, valores, botoes, msg_erro, lista)
 
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+ft.app(target=main)
