@@ -27,13 +27,6 @@ def main(page):
 
     page.scroll = 'always'
     page.title = 'Aplicativo Luarco'
-    '''
-    page.window_title_bar_hidden = False
-    page.window_frameless = False
-    page.window_width = 370
-    page.window_height = 510
-    page.window_always_on_top = False
-    '''
 
 
     def fazer_reqs(pagina, seller_sku, access_token_var):
@@ -44,7 +37,7 @@ def main(page):
 
         payload = { }
         headers = { 'Authorization': f'Bearer {access_token_var}' }
-        resposta = requests.request('GET', url, headers=headers, data=payload)
+        resposta = requests.request('GET', url, headers=headers, data=payload, timeout=60)
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
@@ -71,7 +64,7 @@ def main(page):
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.request('PUT', url, headers=headers, data=payload)
+        resposta = requests.request('PUT', url, headers=headers, data=payload, timeout=60)
         if resposta.status_code != 200:
             retorno = f'{produto} | Não pode ser alterado'
             txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
