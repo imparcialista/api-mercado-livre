@@ -28,13 +28,12 @@ def main(page):
     page.scroll = 'always'
     page.title = 'Aplicativo Luarco'
 
-    '''
     page.window_title_bar_hidden = False
     page.window_frameless = False
-    # page.window_width = 440
+    page.window_width = 440
     page.window_height = 500
     page.window_always_on_top = False
-    '''
+
 
     def fazer_reqs(pagina, seller_sku, access_token_var):
         id_do_vendedor = access_token_var[-9:]
@@ -70,7 +69,6 @@ def main(page):
             payload = json.dumps({ 'price': valor_atualizar })
 
         headers = {
-            'Access-Control-Allow-Origin': '*',
             'Authorization': f'Bearer {access_token_var}',
             'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
@@ -79,7 +77,7 @@ def main(page):
         resposta = requests.request('PUT', url, headers=headers, data=payload)
 
         if resposta.status_code != 200:
-            retorno = f'{produto} | Falha na requisição'
+            retorno = f'{produto} | Não pôde ser alterado'
             txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
         else:
             if type(valor_atualizar) == int:
@@ -124,6 +122,7 @@ def main(page):
                 limpar()
                 msg_erro.value = 'Nenhum anúncio encontrado'
                 botoes.disabled = False
+                c.disabled = False
                 pr.opacity = 0
                 page.update()
 
@@ -190,6 +189,7 @@ def main(page):
 
             else:
                 botoes.disabled = True
+                c.disabled = True
                 pr.opacity = 100
                 page.update()
                 btn_limpar(e)
@@ -198,6 +198,7 @@ def main(page):
                 lista.controls.append(txt_resposta)
 
                 botoes.disabled = False
+                c.disabled = False
                 pr.opacity = 0
 
                 lista_nova = pegar_produtos(sku, valor, access_token)
@@ -230,4 +231,4 @@ def main(page):
     page.add(inicio, access_token_label, valores, botoes, msg_erro, lista)
 
 
-ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+ft.app(target=main)
