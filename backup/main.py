@@ -43,7 +43,6 @@ def main(page):
         headers = { 'Authorization': f'Bearer {access_token_var}',
             }
         resposta = requests.request('GET', url, headers=headers)
-
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
