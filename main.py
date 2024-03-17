@@ -10,14 +10,14 @@ def main(page):
             if page.theme_mode == ft.ThemeMode.LIGHT
             else ft.ThemeMode.LIGHT
         )
-        c.icon = (
+        icone.icon = (
             'LIGHT_MODE_SHARP' if page.theme_mode == ft.ThemeMode.LIGHT else 'DARK_MODE'
         )
         page.update()
 
 
     page.theme_mode = ft.ThemeMode.LIGHT
-    c = ft.IconButton(
+    icone = ft.IconButton(
             icon=ft.icons.LIGHT_MODE_SHARP,
             icon_color='blue',
             icon_size=20,
@@ -108,6 +108,7 @@ def main(page):
                     while quantidade_de_an > 0:
                         quantidade_de_an -= 50
                         paginas += 1
+
                     lista_resultado = ft.ListView(expand=False, spacing=10)
 
                     for pagina in range(paginas):
@@ -123,8 +124,8 @@ def main(page):
                 limpar()
                 msg_erro.value = 'Nenhum anúncio encontrado'
                 botoes.disabled = False
-                c.disabled = False
-                pr.opacity = 0
+                icone.disabled = False
+                carregando.opacity = 0
                 page.update()
 
 
@@ -190,19 +191,20 @@ def main(page):
 
             else:
                 botoes.disabled = True
-                c.disabled = True
-                pr.opacity = 100
+                icone.disabled = True
+                carregando.opacity = 100
                 page.update()
                 btn_limpar(e)
 
                 txt_resposta = ft.Text(f'{texto_solicitacao}', size=16, color='blue', weight='bold')
                 lista.controls.append(txt_resposta)
 
-                botoes.disabled = False
-                c.disabled = False
-                pr.opacity = 0
 
                 lista_nova = pegar_produtos(sku, valor, access_token)
+
+                botoes.disabled = False
+                icone.disabled = False
+                carregando.opacity = 0
 
                 lista.controls.append(ft.Text(''))
                 lista.controls.append(lista_nova)
@@ -212,8 +214,8 @@ def main(page):
 
 
     texto_dica = ft.Text(f'Atualizar estoque Mercado Livre', size=14, color='blue', weight='bold')
-    pr = ft.ProgressRing(width=16, height=16, stroke_width=2, opacity=0, color='blue')
-    inicio = ft.Row([texto_dica, pr, c])
+    carregando = ft.ProgressRing(width=16, height=16, stroke_width=2, opacity=0, color='blue')
+    inicio = ft.Row([texto_dica, carregando, icone])
 
     access_token_label = ft.TextField(label='Access Token', width=380, value='', password=True)
     sku_mlb = ft.TextField(label='SKU', width=120, autofocus=True)
