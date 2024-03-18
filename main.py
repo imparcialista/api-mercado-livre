@@ -201,20 +201,20 @@ def main(page: ft.Page):
                             lista_resultado.controls.append(escrever)
                             page.update()
 
-                return escrever
+                return lista_resultado
 
             else:
                 msg_erro.value = 'Nenhum anúncio encontrado'
                 lista_resultado.controls.append(ft.Text(''))
                 page.update()
-                #return lista_resultado
-                return escrever
+                return lista_resultado
+                
         else:
             msg_erro.value = 'Erro na requisição'
             lista_resultado.controls.append(ft.Text(''))
             page.update()
-            # return lista_resultado
-            return escrever
+            return lista_resultado
+            
 
 
 
