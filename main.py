@@ -113,7 +113,7 @@ def main(page: ft.Page):
 
         headers = {
             'Authorization': f'Bearer {access_token_var}',
-            'Access-Control-Allow-Origin': 'https://luarco.com.br',
+            'Access-Control-Allow-Origin': '*',
 
             }
         
@@ -124,7 +124,7 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Origin": "https://luarco.com.br",
+            "Access-Control-Allow-Origin": "*",
             "Authorization"              : f"Bearer {access_token_var}"
             }
 
