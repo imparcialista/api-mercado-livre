@@ -63,7 +63,6 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "Access-Control-Allow-Origin"
                     "Access-Control-Allow-Origin": "https://luarco.com.br/",
                     "Authorization"              : f"Bearer {access_token_label.value}"
                     }
