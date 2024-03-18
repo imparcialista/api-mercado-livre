@@ -64,7 +64,7 @@ def main(page: ft.Page):
                 page.update()
                 headers = {
                     "Access-Control-Allow-Origin"
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": "https://luarco.com.br/",
                     "Authorization"              : f"Bearer {access_token_label.value}"
                     }
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -115,7 +115,7 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Origin": "https://api.mercadolibre.com",
+            "Access-Control-Allow-Origin": "https://luarco.com.br/",
             "Authorization"              : f"Bearer {access_token_var}"
             }
 
@@ -150,9 +150,10 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "Access-Control-Allow-Origin": "https://api.mercadolibre.com",
+            "Access-Control-Allow-Origin": "https://luarco.com.br/",
             "Authorization"              : f"Bearer {access_token_var}",
             "Content-Type"               : "application/json"
+
             }
 
         resposta = requests.request("PUT", url, headers=headers, data=payload)
