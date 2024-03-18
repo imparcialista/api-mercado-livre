@@ -5,12 +5,13 @@ import json
 # Obs: o scroll não está funcionando
 
 def main(page: ft.Page):
+    page.scroll = 'always'
     # Título
     page.title = 'Aplicativo Luarco'
 
     # Tamanho da janela
-    page.window_width = 650
-    page.window_height = 700
+    page.window_width = 550
+    page.window_height = 550
 
     # Configuração do tema
     page.theme_mode = ft.ThemeMode.DARK
@@ -44,7 +45,6 @@ def main(page: ft.Page):
         access_token_label.disabled = False
         btn_salvar.disabled = False
         btn_voltar_home.disabled = False
-        imagem.opacity = 0
         nome_da_conta.value = ''
         access_token_label.value = ''
         id_vendedor.value = ''
@@ -53,12 +53,13 @@ def main(page: ft.Page):
 
 
     def salvar(e):
+        btn_salvar.icon = 'SAVE'
         access_token_label.error_text = ''
-        imagem.opacity = 0
         if btn_salvar.text == 'Salvar':
             if len(access_token_label.value) == 74:
                 access_token_label.disabled = True
                 btn_salvar.text = 'Salvando'
+                btn_salvar.icon = 'SAVE_OUTLINED'
                 btn_salvar.disabled = True
                 btn_voltar_home.disabled = True
                 page.update()
@@ -77,9 +78,8 @@ def main(page: ft.Page):
                     page.update()
 
                     imagem.src = (resposta['thumbnail']['picture_url'])
-                    imagem.border_radius = 50
-                    imagem.opacity = 100
                     btn_salvar.text = 'Editar'
+                    btn_salvar.icon = 'EDIT'
                     btn_salvar.disabled = False
                     btn_voltar_home.disabled = False
                     msg_erro.value = ''
@@ -110,7 +110,7 @@ def main(page: ft.Page):
             "Authorization"              : f"Bearer {access_token_var}"
             }
 
-        resposta = requests.request("GET", url, headers=headers, data=payload)
+        resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
         if resposta.status_code == 200:
             resposta = resposta.json()
@@ -146,13 +146,13 @@ def main(page: ft.Page):
 
             }
 
-        resposta = requests.request("PUT", url, headers=headers, data=payload)
+        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
 
         page.update()
 
         if resposta.status_code != 200:
             retorno = f'{produto} | Não pôde ser alterado'
-            txt_resposta = ft.Text(f'{retorno}', size=12, color='red')
+            txt_resposta = ft.Text(f'{retorno}', size=15, color='red')
             page.update()
 
         else:
@@ -162,13 +162,14 @@ def main(page: ft.Page):
                 valor_imprimir = valor_atualizar.replace('.', ',')
                 retorno = f'{produto} | Preço alterado para R$ {valor_imprimir}'
 
-            txt_resposta = ft.Text(f'{retorno}', size=12, color='green')
+            txt_resposta = ft.Text(f'{retorno}', size=15, color='green')
 
         return txt_resposta
 
 
     def pegar_produtos(sku, valor_atualizar, access_token_var):
-        lista_resultado = ft.ListView(expand=False, spacing=10)
+        lista_resultado = ft.ListView(expand=True, spacing=10)
+        page.scroll = 'always'
         paginas = 0
         resposta = fazer_reqs(0, sku, access_token_var)
 
@@ -297,7 +298,7 @@ def main(page: ft.Page):
             else:
                 page.update()
                 btn_limpar(e)
-                txt_resposta = ft.Text(f'{texto_solicitacao}', size=16, color='blue', weight='bold')
+                txt_resposta = ft.Text(f'{texto_solicitacao}', size=15, color='blue', weight='bold')
                 lista.controls.append(txt_resposta)
 
                 lista_nova = pegar_produtos(sku, valor, access_token)
@@ -312,6 +313,7 @@ def main(page: ft.Page):
 
 
     def route_change(route):
+        page.scroll = 'always'
         page.views.clear()
         page.views.append(
                 ft.View(
@@ -323,18 +325,20 @@ def main(page: ft.Page):
                 )
 
         if page.route == '/trocarconta':
+            page.scroll = 'always'
             page.views.append(
                     ft.View(
                             '/trocarconta',
                             [
                                 ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                access, nome_da_conta, id_vendedor, botoes_nav
+                                access, nome_da_conta, id_vendedor, botoes_nav,
                                 ],),
                     )
         page.update()
 
 
     def view_pop(view):
+        page.scroll = 'always'
         page.views.pop()
         top_view = page.views[-1]
         page.go(top_view.route)
@@ -343,19 +347,20 @@ def main(page: ft.Page):
     # Elementos
 
     # ElevatedButton
-    btn_voltar_home = ft.ElevatedButton('Voltar', on_click=lambda _: page.go('/'), width=150, height=50)
-    btn_salvar = ft.ElevatedButton('Salvar', on_click=salvar, width=150, height=50)
-    alterar_conta = ft.ElevatedButton('Alterar conta', on_click=lambda _: page.go('/trocarconta'), width=150, height=50)
-    btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, width=150, height=50)
-    btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, width=150, height=50)
+    btn_voltar_home = ft.ElevatedButton('Voltar', on_click=lambda _: page.go('/'), width=150, height=50, icon='ARROW_BACK')
+    btn_salvar = ft.ElevatedButton('Salvar', on_click=salvar, width=150, height=50, icon='SAVE')
+    alterar_conta = ft.ElevatedButton('Alterar conta', on_click=lambda _: page.go('/trocarconta'),
+                                      height=50, icon='ACCOUNT_CIRCLE')
+    btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='CHANGE_CIRCLE')
+    btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, height=50, icon='DELETE')
 
     # Image
-    imagem = ft.Image(src='aplicativo.png', opacity=0, width=50, height=50)
+    imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
     texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre ', size=14, color='blue',
                               weight='bold')
-    msg_erro = ft.Text(f'', size=14, color='red', weight='bold')
+    msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
     # ProgressRing
     carregando = ft.ProgressRing(width=16, height=16, stroke_width=2, opacity=0, color='blue')
@@ -369,7 +374,8 @@ def main(page: ft.Page):
     nome_da_conta = ft.TextField(label='Conta', read_only=True, value='', width=410)
 
     # ListView
-    lista = ft.ListView(expand=False, spacing=10)
+    lista = ft.ListView(expand=True, spacing=10)
+    page.scroll = 'always'
 
     # Row
     botoes_nav = ft.Row([btn_salvar, btn_voltar_home])
@@ -378,6 +384,7 @@ def main(page: ft.Page):
     inicio = ft.Row([texto_do_inicio, carregando, icone])
     valores = ft.Row([sku_mlb, qtd_mlb, prc_mlb])
     botoes = ft.Row([btn_atualizar, alterar_conta, btn_limpar_label ])
+
 
     # Rotas
     page.on_route_change = route_change
