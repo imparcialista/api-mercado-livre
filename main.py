@@ -69,6 +69,7 @@ def main(page: ft.Page):
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
                 if resposta.status_code == 200:
+                    resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
                     resposta = resposta.json()
 
                     id_vendedor.value = resposta['id']
