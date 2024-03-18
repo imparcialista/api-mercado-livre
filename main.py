@@ -55,6 +55,7 @@ def main(page: ft.Page):
     def salvar(e):
         btn_salvar.icon = 'SAVE'
         access_token_label.error_text = ''
+        page.update()
         if btn_salvar.text == 'Salvar':
             if len(access_token_label.value) == 74:
                 access_token_label.disabled = True
@@ -169,6 +170,7 @@ def main(page: ft.Page):
 
     def pegar_produtos(sku, valor_atualizar, access_token_var):
         lista_resultado = ft.ListView(expand=True, spacing=10)
+        escrever = ft.Text('erro 01')
         page.scroll = 'always'
         paginas = 0
         resposta = fazer_reqs(0, sku, access_token_var)
@@ -182,6 +184,7 @@ def main(page: ft.Page):
                     for produto in resposta['results']:
                         escrever = atualizar(produto, valor_atualizar, access_token_var)
                         lista_resultado.controls.append(escrever)
+                        page.update()
                 else:
 
                     while quantidade_de_an > 0:
@@ -196,19 +199,23 @@ def main(page: ft.Page):
                             page.update()
                             escrever = atualizar(produto, valor_atualizar, access_token_var)
                             lista_resultado.controls.append(escrever)
+                            page.update()
 
-                return lista_resultado
+                return escrever
 
             else:
                 msg_erro.value = 'Nenhum anúncio encontrado'
                 lista_resultado.controls.append(ft.Text(''))
                 page.update()
-                return lista_resultado
+                #return lista_resultado
+                return escrever
         else:
             msg_erro.value = 'Erro na requisição'
             lista_resultado.controls.append(ft.Text(''))
             page.update()
-            return lista_resultado
+            # return lista_resultado
+            return escrever
+
 
 
     def limpar():
@@ -228,12 +235,12 @@ def main(page: ft.Page):
     def desabilitar_botoes(booleano):
 
         if booleano == 'sim':
-            alterar_conta.disabled = True
+            btn_alterar_conta.disabled = True
             botoes.disabled = True
             icone.disabled = True
             carregando.opacity = 100
         else:
-            alterar_conta.disabled = False
+            btn_alterar_conta.disabled = False
             botoes.disabled = False
             icone.disabled = False
             carregando.opacity = 0
@@ -300,6 +307,7 @@ def main(page: ft.Page):
                 btn_limpar(e)
                 txt_resposta = ft.Text(f'{texto_solicitacao}', size=15, color='blue', weight='bold')
                 lista.controls.append(txt_resposta)
+                page.update()
 
                 lista_nova = pegar_produtos(sku, valor, access_token)
 
@@ -320,11 +328,13 @@ def main(page: ft.Page):
                         '/',
                         [
                             ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                            inicio, info_conta, valores, botoes, msg_erro, lista
+                            inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
                             ],)
                 )
 
         if page.route == '/trocarconta':
+            access_token_label.error_text = ''
+            page.update()
             page.scroll = 'always'
             page.views.append(
                     ft.View(
@@ -334,7 +344,21 @@ def main(page: ft.Page):
                                 access, nome_da_conta, id_vendedor, botoes_nav,
                                 ],),
                     )
+            page.update()
         page.update()
+        if page.route == '/configuracoes':
+            page.update()
+            page.scroll = 'always'
+            page.views.append(
+                    ft.View(
+                            '/configuracoes',
+                            [
+                                ft.AppBar(title=ft.Text('Configurações (em construção)'),
+                                          bgcolor=ft.colors.SURFACE_VARIANT),
+                                nome_da_conta, btn_voltar_home,
+                                ],),
+                    )
+            page.update()
 
 
     def view_pop(view):
@@ -349,9 +373,12 @@ def main(page: ft.Page):
     # ElevatedButton
     btn_voltar_home = ft.ElevatedButton('Voltar', on_click=lambda _: page.go('/'), width=150, height=50, icon='ARROW_BACK')
     btn_salvar = ft.ElevatedButton('Salvar', on_click=salvar, width=150, height=50, icon='SAVE')
-    alterar_conta = ft.ElevatedButton('Alterar conta', on_click=lambda _: page.go('/trocarconta'),
+    btn_alterar_conta = ft.ElevatedButton('Alterar conta', on_click=lambda _: page.go('/trocarconta'),
                                       height=50, icon='ACCOUNT_CIRCLE')
-    btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='CHANGE_CIRCLE')
+    btn_config = ft.ElevatedButton('Configurações', on_click=lambda _: page.go('/configuracoes'),
+                                      height=50, icon='SETTINGS')
+    btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='UPDATE')
+    btn_buscar = ft.ElevatedButton('Buscar', height=50, icon='SEARCH')
     btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, height=50, icon='DELETE')
 
     # Image
@@ -380,10 +407,11 @@ def main(page: ft.Page):
     # Row
     botoes_nav = ft.Row([btn_salvar, btn_voltar_home])
     info_conta = ft.Row([nome_da_conta, imagem])
+    botoes_conta = ft.Row([btn_alterar_conta, btn_config])
     access = ft.Row([access_token_label, imagem])
     inicio = ft.Row([texto_do_inicio, carregando, icone])
     valores = ft.Row([sku_mlb, qtd_mlb, prc_mlb])
-    botoes = ft.Row([btn_atualizar, alterar_conta, btn_limpar_label ])
+    botoes = ft.Row([btn_buscar, btn_atualizar, btn_limpar_label])
 
 
     # Rotas
