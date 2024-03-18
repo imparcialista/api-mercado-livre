@@ -63,6 +63,7 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
+                    "Access-Control-Allow-Origin"
                     "Access-Control-Allow-Origin": "*",
                     "Authorization"              : f"Bearer {access_token_label.value}"
                     }
