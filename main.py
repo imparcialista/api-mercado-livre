@@ -145,11 +145,17 @@ def main(page: ft.Page):
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.post(url=url, data=payload, headers=headers, )
+
+        resposta = requests.put(url=url, data=payload, headers=headers)
+        msg_erro.value = f'{resposta.json()}'
+        page.update()
 
         if resposta.status_code != 200:
+            #msg_erro.value = f'{resposta.json()}'
             retorno = f'{produto} | Não pôde ser alterado'
             txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
+            page.update()
+
         else:
             if type(valor_atualizar) == int:
                 retorno = f'{produto} | Estoque alterado para {valor_atualizar}'
