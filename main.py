@@ -150,7 +150,8 @@ def main(page: ft.Page):
 
         headers = {
             "Access-Control-Allow-Origin"   : "https://luarco.com.br/",
-            "Method"                        :  "PUT",
+            "access-control-allow-headers": "authorization",
+            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization"                 : f"Bearer {access_token_var}",
             "Content-Type"                  : "application/json"
 
