@@ -71,11 +71,11 @@ def main(page: ft.Page):
                     id_vendedor.value = resposta['id']
                     nome_da_conta.value = resposta['nickname']
                     page.update()
-
+                    '''
                     positivo = resposta['seller_reputation']['transactions']['ratings']['positive']
                     neutro = resposta['seller_reputation']['transactions']['ratings']['neutral']
                     negativo = resposta['seller_reputation']['transactions']['ratings']['negative']
-                    '''
+                    
                     positivo.title = f'{positivo * 100}%'
                     neutro.title = f'{neutro * 100}%'
                     negativo.title = f'{negativo * 100}%'
@@ -139,12 +139,13 @@ def main(page: ft.Page):
             payload = json.dumps({ 'price': valor_atualizar })
 
         headers = {
+            'Access-Control-Allow-Origin' : '*'
             'Authorization': f'Bearer {access_token_var}',
             'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.request('POST', url, headers=headers, data=payload)
+        resposta = requests.request('PUT', url, headers=headers, data=payload)
 
         if resposta.status_code != 200:
             retorno = f'{produto} | Não pôde ser alterado'
