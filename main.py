@@ -111,25 +111,11 @@ def main(page: ft.Page):
     def fazer_reqs(pagina, seller_sku, access_token_var):
         id_do_vendedor = access_token_var[-9:]
 
-        '''
-        url = (f'https://api.mercadolibre.com/users/'
-               f'{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset='
-               f'{pagina}')
-
-        headers = {
-            'Authorization': f'Bearer {access_token_var}',
-            'Access-Control-Allow-Origin': '*',
-
-            }
-        
-        resposta = requests.get(url, headers=headers)
-        '''
-
         url = F"https://api.mercadolibre.com/users/{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset={pagina}"
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://luarco.com.br",
             "Authorization"              : f"Bearer {access_token_var}"
             }
 
