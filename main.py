@@ -140,7 +140,8 @@ def main(page: ft.Page):
 
         headers = {
             'Authorization': f'Bearer {access_token_var}',
-            'Access-Control-Allow-Origin': 'https://luarco.com.br/',
+            #'Access-Control-Allow-Origin': 'https://luarco.com.br',
+            'Access-Control-Allow-Origin': 'https://api.mercadolibre.com',
             'Content-Type' : 'application/json',
             'Accept'       : '*/*'
             }
