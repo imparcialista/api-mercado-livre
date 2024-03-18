@@ -159,7 +159,7 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "Access-Control-Allow-Origin": 'https://luarco.com.br',
+            "Access-Control-Allow-Origin": '*',
             "Authorization"              : f"Bearer {access_token_var}",
             "Content-Type"               : "application/json"
             }
