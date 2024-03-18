@@ -141,7 +141,7 @@ def main(page: ft.Page):
         headers = {
             'Authorization': f'Bearer {access_token_var}',
             'Access-Control-Allow-Origin': 'https://luarco.com.br/',
-            'Content-Type' : 'application/json'
+            'Content-Type' : 'application/json',
             'Accept'       : 'application/json'
             }
         context
@@ -400,4 +400,4 @@ def main(page: ft.Page):
     page.scroll = 'always'
 
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
