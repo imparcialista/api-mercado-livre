@@ -62,7 +62,10 @@ def main(page: ft.Page):
                 btn_salvar.disabled = True
                 btn_voltar_home.disabled = True
                 page.update()
-                headers = { 'Authorization': f'Bearer {access_token_label.value}' }
+                headers = {
+                    "Access-Control-Allow-Origin": "*",
+                    "Authorization"              : f"Bearer {access_token_label.value}"
+                    }
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
                 if resposta.status_code == 200:
