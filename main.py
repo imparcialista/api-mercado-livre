@@ -142,7 +142,7 @@ def main(page: ft.Page):
             'Authorization': f'Bearer {access_token_var}',
             'Access-Control-Allow-Origin': 'https://luarco.com.br/',
             'Content-Type' : 'application/json',
-            'Accept'       : 'application/json'
+            'Accept'       : '*/*'
             }
         context
 
