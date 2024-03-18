@@ -9,8 +9,8 @@ def main(page: ft.Page):
     page.title = 'Aplicativo Luarco'
 
     # Tamanho da janela
-    #page.window_width = 650
-    #page.window_height = 600
+    page.window_width = 650
+    page.window_height = 700
 
     # Configuração do tema
     page.theme_mode = ft.ThemeMode.DARK
@@ -75,15 +75,7 @@ def main(page: ft.Page):
                     id_vendedor.value = resposta['id']
                     nome_da_conta.value = resposta['nickname']
                     page.update()
-                    '''
-                    positivo = resposta['seller_reputation']['transactions']['ratings']['positive']
-                    neutro = resposta['seller_reputation']['transactions']['ratings']['neutral']
-                    negativo = resposta['seller_reputation']['transactions']['ratings']['negative']
-                    
-                    positivo.title = f'{positivo * 100}%'
-                    neutro.title = f'{neutro * 100}%'
-                    negativo.title = f'{negativo * 100}%'
-                    '''
+
                     imagem.src = (resposta['thumbnail']['picture_url'])
                     imagem.border_radius = 50
                     imagem.opacity = 100
@@ -119,9 +111,6 @@ def main(page: ft.Page):
             }
 
         resposta = requests.request("GET", url, headers=headers, data=payload)
-
-        print(resposta.text)
-        print(resposta.json())
 
         if resposta.status_code == 200:
             resposta = resposta.json()
@@ -159,15 +148,11 @@ def main(page: ft.Page):
 
         resposta = requests.request("PUT", url, headers=headers, data=payload)
 
-        #resposta = requests.request('PUT', url=url, data=payload, headers=headers)
-
-        msg_erro.value = f'{resposta.json()}'
         page.update()
 
         if resposta.status_code != 200:
-            #msg_erro.value = f'{resposta.json()}'
             retorno = f'{produto} | Não pôde ser alterado'
-            txt_resposta = ft.Text(f'{retorno}', size=14, color='red')
+            txt_resposta = ft.Text(f'{retorno}', size=12, color='red')
             page.update()
 
         else:
@@ -177,7 +162,7 @@ def main(page: ft.Page):
                 valor_imprimir = valor_atualizar.replace('.', ',')
                 retorno = f'{produto} | Preço alterado para R$ {valor_imprimir}'
 
-            txt_resposta = ft.Text(f'{retorno}', size=14, color='green')
+            txt_resposta = ft.Text(f'{retorno}', size=12, color='green')
 
         return txt_resposta
 
@@ -328,20 +313,13 @@ def main(page: ft.Page):
 
     def route_change(route):
         page.views.clear()
-
         page.views.append(
                 ft.View(
                         '/',
                         [
                             ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                            inicio,
-                            info_conta,
-                            valores,
-                            botoes,
-                            msg_erro,
-                            lista
-                            ],
-                        )
+                            inicio, info_conta, valores, botoes, msg_erro, lista
+                            ],)
                 )
 
         if page.route == '/trocarconta':
@@ -349,16 +327,9 @@ def main(page: ft.Page):
                     ft.View(
                             '/trocarconta',
                             [
-
                                 ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                access,
-                                nome_da_conta,
-                                id_vendedor,
-                                botoes_nav
-
-                                ],
-                            ),
-
+                                access, nome_da_conta, id_vendedor, botoes_nav
+                                ],),
                     )
         page.update()
 
