@@ -130,8 +130,8 @@ def main(page: ft.Page):
 
         resposta = requests.request("GET", url, headers=headers, data=payload)
 
-        print(response.text)
-        print(response.json())
+        print(resposta.text)
+        print(resposta.json())
 
         if resposta.status_code == 200:
             resposta = resposta.json()
