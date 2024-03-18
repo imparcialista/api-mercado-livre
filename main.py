@@ -159,20 +159,15 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            'Authorization': f'Bearer {access_token_var}',
-            'Access-Control-Allow-Origin': 'https://luarco.com.br',
-            'Access-Control-Allow-Methods': 'PUT',
-            'Request Method' : 'OPTIONS'
-            #'Access-Control-Allow-Origin': 'https://api.mercadolibre.com',
-            #'Content-Type' : 'application/json',
-            #'Accept'       : '*/*'
+            "Access-Control-Allow-Origin": 'https://luarco.com.br',
+            "Authorization"              : f"Bearer {access_token_var}",
+            "Content-Type"               : "application/json"
             }
 
+        resposta = requests.request("PUT", url, headers=headers, data=payload)
 
+        #resposta = requests.request('PUT', url=url, data=payload, headers=headers)
 
-
-
-        resposta = requests.request('PUT', url=url, data=payload, headers=headers)
         msg_erro.value = f'{resposta.json()}'
         page.update()
 
