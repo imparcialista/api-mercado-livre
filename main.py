@@ -140,12 +140,12 @@ def main(page: ft.Page):
 
         headers = {
             'Authorization': f'Bearer {access_token_var}',
-            #'Access-Control-Allow-Origin': 'https://luarco.com.br',
-            'Access-Control-Allow-Origin': 'https://api.mercadolibre.com',
+            'Access-Control-Allow-Origin': 'https://luarco.com.br',
+            #'Access-Control-Allow-Origin': 'https://api.mercadolibre.com',
             'Content-Type' : 'application/json',
             'Accept'       : '*/*'
             }
-        context
+
 
 
         resposta = requests.request('PUT', url=url, data=payload, headers=headers, timeout=30)
@@ -404,4 +404,4 @@ def main(page: ft.Page):
     page.scroll = 'always'
 
 
-ft.app(target=main, assets_dir="assets")
+ft.app(target=main)
