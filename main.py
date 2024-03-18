@@ -63,7 +63,7 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = { 'Authorization': f'Bearer {access_token_label.value}' }
-                resposta = requests.request('GET', 'https://api.mercadolibre.com/users/me', headers=headers)
+                resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
                 if resposta.status_code == 200:
                     resposta = resposta.json()
@@ -111,7 +111,7 @@ def main(page: ft.Page):
         headers = {
             'Authorization': f'Bearer {access_token_var}',
             }
-        resposta = requests.request('GET', url, headers=headers)
+        resposta = requests.get(url, headers=headers)
 
         if resposta.status_code == 200:
             resposta = resposta.json()
@@ -145,7 +145,7 @@ def main(page: ft.Page):
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.request('PUT', url, headers=headers, data=payload)
+        resposta = requests.put(url, headers=headers, data=payload)
 
         if resposta.status_code != 200:
             retorno = f'{produto} | Não pôde ser alterado'
