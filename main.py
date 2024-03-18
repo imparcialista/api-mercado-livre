@@ -105,13 +105,33 @@ def main(page: ft.Page):
 
     def fazer_reqs(pagina, seller_sku, access_token_var):
         id_do_vendedor = access_token_var[-9:]
+
+        '''
         url = (f'https://api.mercadolibre.com/users/'
                f'{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset='
                f'{pagina}')
+
         headers = {
             'Authorization': f'Bearer {access_token_var}',
+            'Access-Control-Allow-Origin': 'https://luarco.com.br',
+
             }
+        
         resposta = requests.get(url, headers=headers)
+        '''
+
+        url = F"https://api.mercadolibre.com/users/{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset={pagina}"
+
+        payload = { }
+        headers = {
+            "Access-Control-Allow-Origin": "https://luarco.com.br",
+            "Authorization"              : f"Bearer {access_token_var}"
+            }
+
+        resposta = requests.request("GET", url, headers=headers, data=payload)
+
+        print(response.text)
+        print(response.json())
 
         if resposta.status_code == 200:
             resposta = resposta.json()
@@ -148,11 +168,11 @@ def main(page: ft.Page):
             #'Accept'       : '*/*'
             }
 
-        OPTIONS = 'Access-Control-Allow-Origin': 'https://luarco.com.br'
 
 
 
-        resposta = requests.request('PUT', url=url, data=payload, headers=headers, options=OPTIONS)
+
+        resposta = requests.request('PUT', url=url, data=payload, headers=headers)
         msg_erro.value = f'{resposta.json()}'
         page.update()
 
