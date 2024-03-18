@@ -139,14 +139,15 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            'Access-Control-Allow-Origin' : '*',
             'Authorization': f'Bearer {access_token_var}',
+            'Access-Control-Allow-Origin': 'https://luarco.com.br/',
             'Content-Type' : 'application/json'
-            #'Accept'       : 'application/json'
+            'Accept'       : 'application/json'
             }
+        context
 
 
-        resposta = requests.request('PUT', url=url, data=payload, headers=headers)
+        resposta = requests.request('PUT', url=url, data=payload, headers=headers, timeout=30)
         msg_erro.value = f'{resposta.json()}'
         page.update()
 
