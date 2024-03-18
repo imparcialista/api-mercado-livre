@@ -141,12 +141,12 @@ def main(page: ft.Page):
         headers = {
             'Access-Control-Allow-Origin' : '*',
             'Authorization': f'Bearer {access_token_var}',
-            'Content-Type' : 'application/json',
-            'Accept'       : 'application/json'
+            'Content-Type' : 'application/json'
+            #'Accept'       : 'application/json'
             }
 
 
-        resposta = requests.put(url=url, data=payload, headers=headers)
+        resposta = requests.request('PUT', url=url, data=payload, headers=headers)
         msg_erro.value = f'{resposta.json()}'
         page.update()
 
