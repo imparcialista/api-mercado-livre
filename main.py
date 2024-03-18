@@ -145,7 +145,7 @@ def main(page: ft.Page):
             'Accept'       : 'application/json'
             }
 
-        resposta = requests.put(url, headers=headers, data=payload)
+        resposta = requests.post(url=url, data=payload, headers=headers, )
 
         if resposta.status_code != 200:
             retorno = f'{produto} | Não pôde ser alterado'
