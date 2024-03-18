@@ -130,13 +130,13 @@ def main(page: ft.Page):
 
         if type(valor_atualizar) == int:
             if valor_atualizar > 0:
-                payload = json.dumps({ 'available_quantity': valor_atualizar, 'status': 'active' })
+                payload = json.dumps({ "available_quantity": valor_atualizar, "status": "active" })
 
             else:
-                payload = json.dumps({ 'available_quantity': valor_atualizar })
+                payload = json.dumps({ "available_quantity": valor_atualizar })
 
         else:
-            payload = json.dumps({ 'price': valor_atualizar })
+            payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
             'Access-Control-Allow-Origin' : '*',
