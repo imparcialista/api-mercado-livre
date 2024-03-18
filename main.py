@@ -148,9 +148,11 @@ def main(page: ft.Page):
             #'Accept'       : '*/*'
             }
 
+        OPTIONS = 'Access-Control-Allow-Origin': 'https://luarco.com.br'
 
 
-        resposta = requests.request('PUT', url=url, data=payload, headers=headers, timeout=30)
+
+        resposta = requests.request('PUT', url=url, data=payload, headers=headers, options=OPTIONS)
         msg_erro.value = f'{resposta.json()}'
         page.update()
 
