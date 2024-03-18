@@ -9,8 +9,8 @@ def main(page: ft.Page):
     page.title = 'Aplicativo Luarco'
 
     # Tamanho da janela
-    page.window_width = 650
-    page.window_height = 600
+    #page.window_width = 650
+    #page.window_height = 600
 
     # Configuração do tema
     page.theme_mode = ft.ThemeMode.DARK
@@ -193,6 +193,8 @@ def main(page: ft.Page):
                         resposta = fazer_reqs(pagina * 50, sku, access_token_var)
 
                         for produto in resposta['results']:
+                            msg_erro.value = 'Carregando...'
+                            page.update()
                             escrever = atualizar(produto, valor_atualizar, access_token_var)
                             lista_resultado.controls.append(escrever)
 
@@ -306,6 +308,7 @@ def main(page: ft.Page):
                 lista.controls.append(lista_nova)
                 lista.controls.append(ft.Text(''))
                 desabilitar_botoes('não')
+                msg_erro.value = ''
                 page.scroll = 'always'
                 page.update()
 
