@@ -116,8 +116,13 @@ def main(page: ft.Page):
             "Authorization"               : f"Bearer {access_token_label.value}",
             }
 
-        resposta = requests.request("GET", url=url, headers=headers, data=payload)
+        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
 
+        resposta = resposta.json()
+
+        msg_erro.value = f'{resposta}'
+        page.update()
+        '''
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
@@ -128,6 +133,8 @@ def main(page: ft.Page):
             page.update()
             erro = 400
             return erro
+        '''
+        return resposta
 
 
     def atualizar(produto, valor_atualizar, access_token_var):
@@ -147,7 +154,7 @@ def main(page: ft.Page):
             "access-control-allow-headers": "access-control-allow-origin,authorization",
             "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Access-Control-Allow-Origin" : "*",
-            "Authorization"               : f"Bearer {access_token_label.value}",
+            "Authorization"               : f"Bearer {access_token_var}",
             }
 
         # resposta = requests.request("PUT", url=url, headers=headers, data=payload)
@@ -334,7 +341,7 @@ def main(page: ft.Page):
                         '/',
                         [
                             ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                            inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
+                                inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
                             ],)
                 )
 
@@ -347,7 +354,7 @@ def main(page: ft.Page):
                             '/trocarconta',
                             [
                                 ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                access, nome_da_conta, id_vendedor, botoes_nav,
+                                    access, nome_da_conta, id_vendedor, botoes_nav,
                                 ],),
                     )
             page.update()
@@ -362,8 +369,7 @@ def main(page: ft.Page):
                                 ft.AppBar(title=ft.Text('Configurações (em construção)'),
                                           bgcolor=ft.colors.SURFACE_VARIANT),
                                 nome_da_conta, btn_voltar_home,
-                                ],),
-                    )
+                                ],),)
             page.update()
 
 
