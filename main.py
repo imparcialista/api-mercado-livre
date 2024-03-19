@@ -400,7 +400,8 @@ def main(page: ft.Page):
     imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre ', size=14, color='blue',
+    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5', size=14,
+                              color='blue',
                               weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
