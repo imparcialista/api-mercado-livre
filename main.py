@@ -65,9 +65,18 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "Access-Control-Allow-Origin": "https://luarco.com.br",
-                    "Authorization"              : f"Bearer {access_token_label.value}"
+                    "Access-Control-Allow-Credentials": 'true',
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods" : "GET,OPTIONS,PUT",
+                    "Access-Control-Allow-Headers" : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
+                                                     "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
+                    "Authorization"              : f"Bearer {access_token_label.value}",
+
                     }
+
+
+
+
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
                 if resposta.status_code == 200:
@@ -107,8 +116,13 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Origin": "https://luarco.com.br/",
-            "Authorization"              : f"Bearer {access_token_var}"
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Origin"     : "*",
+            "Access-Control-Allow-Methods"    : "GET,OPTIONS,PUT",
+            "Access-Control-Allow-Headers"    : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
+                                                "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
+            "Authorization"                   : f"Bearer {access_token_label.value}",
+
             }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
@@ -139,11 +153,12 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "Access-Control-Allow-Origin"   : "https://luarco.com.br/",
-            "access-control-allow-headers": "authorization",
-            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-            "Authorization"                 : f"Bearer {access_token_var}",
-            "Content-Type"                  : "application/json"
+            "Access-Control-Allow-Credentials": 'true',
+            "Access-Control-Allow-Origin"     : "*",
+            "Access-Control-Allow-Methods"    : "GET,OPTIONS,PUT",
+            "Access-Control-Allow-Headers"    : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
+                                                "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
+            "Authorization"                   : f"Bearer {access_token_label.value}",
 
             }
 
