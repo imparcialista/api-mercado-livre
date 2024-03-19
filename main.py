@@ -11,7 +11,7 @@ def main(page: ft.Page):
 
     # Tamanho da janela
     page.window_width = 550
-    page.window_height = 550
+    page.window_height = 650
 
     # Configuração do tema
     page.theme_mode = ft.ThemeMode.DARK
@@ -65,7 +65,7 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "Access-Control-Allow-Origin": "https://luarco.com.br/",
+                    "Access-Control-Allow-Origin": "https://luarco.com.br",
                     "Authorization"              : f"Bearer {access_token_label.value}"
                     }
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
