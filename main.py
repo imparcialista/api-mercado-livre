@@ -123,7 +123,8 @@ def main(page: ft.Page):
             resposta = resposta.json()
             return resposta
         else:
-            msg_erro.value = 'Falha na requisição, altere os valores'
+            #msg_erro.value = 'Falha na requisição, altere os valores'
+            msg_erro.value = resposta.json()
             qtd_mlb.value = ''
             prc_mlb.value = ''
             page.update()
@@ -146,7 +147,7 @@ def main(page: ft.Page):
 
         headers = {
             "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_label.value}",
+            "Authorization"                   : f"Bearer {access_token_var}",
             }
 
         resposta = requests.request("PUT", url=url, headers=headers, data=payload)
@@ -216,8 +217,6 @@ def main(page: ft.Page):
             lista_resultado.controls.append(ft.Text(''))
             page.update()
             return lista_resultado
-            
-
 
 
     def limpar():
@@ -332,7 +331,7 @@ def main(page: ft.Page):
                         '/',
                         [
                             ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                            inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
+                                inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
                             ],)
                 )
 
@@ -359,7 +358,7 @@ def main(page: ft.Page):
                             [
                                 ft.AppBar(title=ft.Text('Configurações (em construção)'),
                                           bgcolor=ft.colors.SURFACE_VARIANT),
-                                nome_da_conta, btn_voltar_home,
+                                    nome_da_conta, btn_voltar_home,
                                 ],),
                     )
             page.update()
