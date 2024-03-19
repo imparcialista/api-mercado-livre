@@ -65,17 +65,9 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "Access-Control-Allow-Credentials": 'true',
                     "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods" : "GET,OPTIONS,PUT",
-                    "Access-Control-Allow-Headers" : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
-                                                     "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
                     "Authorization"              : f"Bearer {access_token_label.value}",
-
                     }
-
-
-
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
@@ -116,13 +108,8 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Credentials": 'true',
             "Access-Control-Allow-Origin"     : "*",
-            "Access-Control-Allow-Methods"    : "GET,OPTIONS,PUT",
-            "Access-Control-Allow-Headers"    : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
-                                                "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
             "Authorization"                   : f"Bearer {access_token_label.value}",
-
             }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
@@ -153,13 +140,8 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "Access-Control-Allow-Credentials": 'true',
             "Access-Control-Allow-Origin"     : "*",
-            "Access-Control-Allow-Methods"    : "GET,OPTIONS,PUT",
-            "Access-Control-Allow-Headers"    : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, "
-                                                "Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
             "Authorization"                   : f"Bearer {access_token_label.value}",
-
             }
 
         resposta = requests.request("PUT", url=url, headers=headers, data=payload)
@@ -253,11 +235,13 @@ def main(page: ft.Page):
             btn_alterar_conta.disabled = True
             botoes.disabled = True
             icone.disabled = True
+            btn_config.disabled = True
             carregando.opacity = 100
         else:
             btn_alterar_conta.disabled = False
             botoes.disabled = False
             icone.disabled = False
+            btn_config.disabled = False
             carregando.opacity = 0
 
         page.update()
@@ -393,14 +377,14 @@ def main(page: ft.Page):
     btn_config = ft.ElevatedButton('Configurações', on_click=lambda _: page.go('/configuracoes'),
                                       height=50, icon='SETTINGS')
     btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='UPDATE')
-    btn_buscar = ft.ElevatedButton('Buscar', height=50, icon='SEARCH')
+    btn_buscar = ft.ElevatedButton('Buscar', height=50, icon='SEARCH', disabled=True)
     btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, height=50, icon='DELETE')
 
     # Image
     imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5', size=14,
+    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
                               color='blue',
                               weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
@@ -428,7 +412,6 @@ def main(page: ft.Page):
     inicio = ft.Row([texto_do_inicio, carregando, icone])
     valores = ft.Row([sku_mlb, qtd_mlb, prc_mlb])
     botoes = ft.Row([btn_buscar, btn_atualizar, btn_limpar_label])
-
 
     # Rotas
     page.on_route_change = route_change
