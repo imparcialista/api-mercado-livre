@@ -65,7 +65,7 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "access-control-allow-headers": "access-control-allow-origin,authorization",
+                    "access-control-allow-headers": "access-control-allow-origin",
                     "access-control-allow-methods" : "PUT, GET, POST, DELETE, OPTIONS",
                     "Access-Control-Allow-Origin": "*",
                     "Authorization"              : f"Bearer {access_token_label.value}",
@@ -114,7 +114,7 @@ def main(page: ft.Page):
         payload = { }
         headers = {
             "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_label.value}",
+            "Authorization"                   : f"Bearer {access_token_label.value}"
             }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
