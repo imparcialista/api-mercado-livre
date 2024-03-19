@@ -150,7 +150,8 @@ def main(page: ft.Page):
             "Authorization"               : f"Bearer {access_token_label.value}",
             }
 
-        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
+        # resposta = requests.request("PUT", url=url, headers=headers, data=payload)
+        resposta = requests.request("GET", url=url, headers=headers)
 
         page.update()
 
@@ -390,7 +391,7 @@ def main(page: ft.Page):
     imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.2', size=14,
+    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.2g', size=14,
                               color='blue',
                               weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
