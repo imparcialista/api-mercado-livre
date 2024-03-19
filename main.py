@@ -65,8 +65,10 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
+                    "access-control-allow-headers": "access-control-allow-origin,authorization",
+                    "access-control-allow-methods" : "PUT, GET, POST, DELETE, OPTIONS",
                     "Access-Control-Allow-Origin": "*",
-                    "Authorization"              : f"Bearer {access_token_label.value}",
+                    "Authorization" : f"Bearer {access_token_label.value}",
                     }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -108,8 +110,10 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_label.value}",
+            "access-control-allow-headers": "access-control-allow-origin,authorization",
+            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+            "Access-Control-Allow-Origin" : "*",
+            "Authorization"               : f"Bearer {access_token_label.value}",
             }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
@@ -140,8 +144,10 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_label.value}",
+            "access-control-allow-headers": "access-control-allow-origin,authorization",
+            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+            "Access-Control-Allow-Origin" : "*",
+            "Authorization"               : f"Bearer {access_token_label.value}",
             }
 
         resposta = requests.request("PUT", url=url, headers=headers, data=payload)
@@ -384,7 +390,7 @@ def main(page: ft.Page):
     imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
+    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.2', size=14,
                               color='blue',
                               weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
