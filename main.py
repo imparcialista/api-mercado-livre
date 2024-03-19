@@ -68,10 +68,13 @@ def main(page: ft.Page):
                     "access-control-allow-headers": "access-control-allow-origin,authorization",
                     "access-control-allow-methods" : "PUT, GET, POST, DELETE, OPTIONS",
                     "Access-Control-Allow-Origin": "*",
-                    "Authorization" : f"Bearer {access_token_label.value}",
+                    "Authorization"              : f"Bearer {access_token_label.value}",
                     }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
+
+                msg_erro.value = resposta.status_code
+                page.update()
 
                 if resposta.status_code == 200:
                     resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -110,19 +113,12 @@ def main(page: ft.Page):
 
         payload = { }
         headers = {
-            "access-control-allow-headers": "access-control-allow-origin,authorization",
-            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-            "Access-Control-Allow-Origin" : "*",
-            "Authorization"               : f"Bearer {access_token_label.value}",
+            "Access-Control-Allow-Origin"     : "*",
+            "Authorization"                   : f"Bearer {access_token_label.value}",
             }
 
-        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
+        resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
-        resposta = resposta.json()
-
-        msg_erro.value = f'{resposta}'
-        page.update()
-        '''
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
@@ -133,8 +129,6 @@ def main(page: ft.Page):
             page.update()
             erro = 400
             return erro
-        '''
-        return resposta
 
 
     def atualizar(produto, valor_atualizar, access_token_var):
@@ -151,14 +145,11 @@ def main(page: ft.Page):
             payload = json.dumps({ "price": valor_atualizar })
 
         headers = {
-            "access-control-allow-headers": "access-control-allow-origin,authorization",
-            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-            "Access-Control-Allow-Origin" : "*",
-            "Authorization"               : f"Bearer {access_token_var}",
+            "Access-Control-Allow-Origin"     : "*",
+            "Authorization"                   : f"Bearer {access_token_label.value}",
             }
 
-        # resposta = requests.request("PUT", url=url, headers=headers, data=payload)
-        resposta = requests.request("GET", url=url, headers=headers)
+        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
 
         page.update()
 
@@ -341,7 +332,7 @@ def main(page: ft.Page):
                         '/',
                         [
                             ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
+                            inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
                             ],)
                 )
 
@@ -354,7 +345,7 @@ def main(page: ft.Page):
                             '/trocarconta',
                             [
                                 ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                    access, nome_da_conta, id_vendedor, botoes_nav,
+                                access, nome_da_conta, id_vendedor, botoes_nav,
                                 ],),
                     )
             page.update()
@@ -369,7 +360,8 @@ def main(page: ft.Page):
                                 ft.AppBar(title=ft.Text('Configurações (em construção)'),
                                           bgcolor=ft.colors.SURFACE_VARIANT),
                                 nome_da_conta, btn_voltar_home,
-                                ],),)
+                                ],),
+                    )
             page.update()
 
 
@@ -397,7 +389,7 @@ def main(page: ft.Page):
     imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.2g', size=14,
+    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
                               color='blue',
                               weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
