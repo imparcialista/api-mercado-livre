@@ -2,6 +2,7 @@ import flet as ft
 import requests
 import json
 
+
 # Obs: o scroll não está funcionando
 
 def main(page: ft.Page):
@@ -16,7 +17,6 @@ def main(page: ft.Page):
     # Configuração do tema
     page.theme_mode = ft.ThemeMode.DARK
 
-
     def theme_changed(e):
         page.theme_mode = (
             ft.ThemeMode.DARK
@@ -28,17 +28,12 @@ def main(page: ft.Page):
         )
         page.update()
 
-
     icone = ft.IconButton(
-            icon=ft.icons.DARK_MODE,
-            icon_color='blue',
-            icon_size=20,
-            tooltip='Mudar tema',
-            on_click=theme_changed
-            )
-
-
-    # Funções
+        icon=ft.icons.DARK_MODE,
+        icon_color='blue',
+        icon_size=20,
+        tooltip='Mudar tema',
+        on_click=theme_changed)
 
     def token_invalido():
         access_token_label.error_text = 'Insira um Access Token válido'
@@ -50,7 +45,6 @@ def main(page: ft.Page):
         id_vendedor.value = ''
         btn_salvar.text = 'Salvar'
         page.update()
-
 
     def salvar(e):
         btn_salvar.icon = 'SAVE'
@@ -66,10 +60,10 @@ def main(page: ft.Page):
                 page.update()
                 headers = {
                     "access-control-allow-headers": "access-control-allow-origin",
-                    "access-control-allow-methods" : "PUT, GET, POST, DELETE, OPTIONS",
+                    "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
                     "Access-Control-Allow-Origin": "*",
-                    "Authorization"              : f"Bearer {access_token_label.value}",
-                    }
+                    "Authorization": f"Bearer {access_token_label.value}",
+                }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
@@ -105,17 +99,19 @@ def main(page: ft.Page):
             btn_salvar.text = 'Salvar'
             page.update()
 
-
     def fazer_reqs(pagina, seller_sku, access_token_var):
         id_do_vendedor = access_token_var[-9:]
 
-        url = F"https://api.mercadolibre.com/users/{id_do_vendedor}/items/search?seller_sku={seller_sku}&offset={pagina}"
+        url = (f"https://api.mercadolibre.com/users/"
+               f"{id_do_vendedor}/items/search?seller_sku="
+               f"{seller_sku}&offset="
+               f"{pagina}")
 
-        payload = { }
+        payload = {}
         headers = {
-            "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_label.value}"
-            }
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": f"Bearer {access_token_label.value}"
+        }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
@@ -123,7 +119,7 @@ def main(page: ft.Page):
             resposta = resposta.json()
             return resposta
         else:
-            #msg_erro.value = 'Falha na requisição, altere os valores'
+            # msg_erro.value = 'Falha na requisição, altere os valores'
             msg_erro.value = resposta.json()
             qtd_mlb.value = ''
             prc_mlb.value = ''
@@ -131,24 +127,23 @@ def main(page: ft.Page):
             erro = 400
             return erro
 
-
     def atualizar(produto, valor_atualizar, access_token_var):
         url = f'https://api.mercadolibre.com/items/{produto}'
 
-        if type(valor_atualizar) == int:
+        if type(valor_atualizar) is int:
             if valor_atualizar > 0:
-                payload = json.dumps({ "available_quantity": valor_atualizar, "status": "active" })
+                payload = json.dumps({"available_quantity": valor_atualizar, "status": "active"})
 
             else:
-                payload = json.dumps({ "available_quantity": valor_atualizar })
+                payload = json.dumps({"available_quantity": valor_atualizar})
 
         else:
-            payload = json.dumps({ "price": valor_atualizar })
+            payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            "Access-Control-Allow-Origin"     : "*",
-            "Authorization"                   : f"Bearer {access_token_var}",
-            }
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": f"Bearer {access_token_var}",
+        }
 
         resposta = requests.request("PUT", url=url, headers=headers, data=payload)
 
@@ -160,7 +155,7 @@ def main(page: ft.Page):
             page.update()
 
         else:
-            if type(valor_atualizar) == int:
+            if type(valor_atualizar) is int:
                 retorno = f'{produto} | Estoque alterado para {valor_atualizar}'
             else:
                 valor_imprimir = valor_atualizar.replace('.', ',')
@@ -170,10 +165,8 @@ def main(page: ft.Page):
 
         return txt_resposta
 
-
     def pegar_produtos(sku, valor_atualizar, access_token_var):
         lista_resultado = ft.ListView(expand=True, spacing=10)
-        escrever = ft.Text('erro 01')
         page.scroll = 'always'
         paginas = 0
         resposta = fazer_reqs(0, sku, access_token_var)
@@ -211,13 +204,12 @@ def main(page: ft.Page):
                 lista_resultado.controls.append(ft.Text(''))
                 page.update()
                 return lista_resultado
-                
+
         else:
             msg_erro.value = 'Erro na requisição'
             lista_resultado.controls.append(ft.Text(''))
             page.update()
             return lista_resultado
-
 
     def limpar():
         msg_erro.value = ''
@@ -228,10 +220,8 @@ def main(page: ft.Page):
         lista.controls.clear()
         page.update()
 
-
     def btn_limpar(e):
         limpar()
-
 
     def desabilitar_botoes(booleano):
 
@@ -241,6 +231,7 @@ def main(page: ft.Page):
             icone.disabled = True
             btn_config.disabled = True
             carregando.opacity = 100
+
         else:
             btn_alterar_conta.disabled = False
             botoes.disabled = False
@@ -249,7 +240,6 @@ def main(page: ft.Page):
             carregando.opacity = 0
 
         page.update()
-
 
     def btn_click(e):
         desabilitar_botoes('sim')
@@ -322,47 +312,47 @@ def main(page: ft.Page):
                 page.scroll = 'always'
                 page.update()
 
-
     def route_change(route):
         page.scroll = 'always'
         page.views.clear()
         page.views.append(
-                ft.View(
-                        '/',
-                        [
-                            ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
-                            ],)
-                )
+            ft.View(
+                '/',
+                [
+                    ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
+                    inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
+                ], )
+        )
 
         if page.route == '/trocarconta':
             access_token_label.error_text = ''
             page.update()
             page.scroll = 'always'
             page.views.append(
-                    ft.View(
-                            '/trocarconta',
-                            [
-                                ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
-                                access, nome_da_conta, id_vendedor, botoes_nav,
-                                ],),
-                    )
+                ft.View(
+                    '/trocarconta',
+                    [
+                        ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
+                        access, nome_da_conta, id_vendedor, botoes_nav,
+                    ], ),
+            )
             page.update()
         page.update()
         if page.route == '/configuracoes':
             page.update()
             page.scroll = 'always'
             page.views.append(
-                    ft.View(
-                            '/configuracoes',
-                            [
-                                ft.AppBar(title=ft.Text('Configurações (em construção)'),
-                                          bgcolor=ft.colors.SURFACE_VARIANT),
-                                    nome_da_conta, btn_voltar_home,
-                                ],),
-                    )
+                ft.View(
+                    '/configuracoes',
+                    [
+                        ft.AppBar(
+                            title=ft.Text('Configurações (em construção)'),
+                            bgcolor=ft.colors.SURFACE_VARIANT
+                        ),
+                        nome_da_conta, btn_voltar_home,
+                    ], ),
+            )
             page.update()
-
 
     def view_pop(view):
         page.scroll = 'always'
@@ -370,27 +360,34 @@ def main(page: ft.Page):
         top_view = page.views[-1]
         page.go(top_view.route)
 
-
     # Elementos
 
     # ElevatedButton
-    btn_voltar_home = ft.ElevatedButton('Voltar', on_click=lambda _: page.go('/'), width=150, height=50, icon='ARROW_BACK')
+    btn_voltar_home = ft.ElevatedButton(
+        'Voltar', on_click=lambda _: page.go('/'), width=150, height=50, icon='ARROW_BACK'
+    )
     btn_salvar = ft.ElevatedButton('Salvar', on_click=salvar, width=150, height=50, icon='SAVE')
-    btn_alterar_conta = ft.ElevatedButton('Alterar conta', on_click=lambda _: page.go('/trocarconta'),
-                                      height=50, icon='ACCOUNT_CIRCLE')
-    btn_config = ft.ElevatedButton('Configurações', on_click=lambda _: page.go('/configuracoes'),
-                                      height=50, icon='SETTINGS')
+    btn_alterar_conta = ft.ElevatedButton(
+        'Alterar conta', on_click=lambda _: page.go('/trocarconta'),
+        height=50, icon='ACCOUNT_CIRCLE'
+    )
+    btn_config = ft.ElevatedButton(
+        'Configurações', on_click=lambda _: page.go('/configuracoes'),
+        height=50, icon='SETTINGS'
+    )
     btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='UPDATE')
     btn_buscar = ft.ElevatedButton('Buscar', height=50, icon='SEARCH', disabled=True)
     btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, height=50, icon='DELETE')
 
     # Image
-    imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius = 50)
+    imagem = ft.Image(src='assets/android-chrome-512x512.png', width=50, height=50, border_radius=50)
 
     # Text
-    texto_do_inicio = ft.Text(f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
-                              color='blue',
-                              weight='bold')
+    texto_do_inicio = ft.Text(
+        f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
+        color='blue',
+        weight='bold'
+    )
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
     # ProgressRing
