@@ -114,6 +114,8 @@ def main(page: ft.Page):
         payload = {}
         headers = {
             "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json",
             "Authorization": f"Bearer {access_token_label.value}"
         }
 
