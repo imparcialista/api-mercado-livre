@@ -61,10 +61,13 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                    "Content-Type": "application/json",
+
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Credentials": "true",
-                    "Content-Type": "application/json",
-                    "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+
+                    "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
                     "Authorization": f"Bearer {access_token_label.value}"
                 }
 
@@ -114,10 +117,13 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            "Content-Type": "application/json",
+
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json",
-            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+
+            "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization": f"Bearer {access_token_var}"
         }
 
@@ -126,6 +132,7 @@ def main(page: ft.Page):
         if resposta.status_code == 200:
             resposta = resposta.json()
             return resposta
+
         else:
             # msg_erro.value = 'Falha na requisição, altere os valores'
             msg_erro.value = resposta.json()
@@ -149,10 +156,13 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            "Content-Type": "application/json",
+
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
-            "Content-Type": "application/json",
-            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+
+            "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization": f"Bearer {access_token_var}"
         }
 
