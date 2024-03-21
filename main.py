@@ -118,7 +118,7 @@ def main(page: ft.Page):
             "Access-Control-Allow-Credentials": "true",
             "Content-Type": "application/json",
             "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-            "Authorization": f"Bearer {access_token_label.value}"
+            "Authorization": f"Bearer {access_token_var}"
         }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
@@ -153,7 +153,7 @@ def main(page: ft.Page):
             "Access-Control-Allow-Credentials": "true",
             "Content-Type": "application/json",
             "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-            "Authorization": f"Bearer {access_token_label.value}"
+            "Authorization": f"Bearer {access_token_var}"
         }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
