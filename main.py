@@ -50,7 +50,9 @@ def main(page: ft.Page):
         btn_salvar.icon = 'SAVE'
         access_token_label.error_text = ''
         page.update()
+
         if btn_salvar.text == 'Salvar':
+
             if len(access_token_label.value) == 74:
                 access_token_label.disabled = True
                 btn_salvar.text = 'Salvando'
@@ -86,11 +88,13 @@ def main(page: ft.Page):
                     msg_erro.value = ''
 
                     page.update()
+
                 else:
                     token_invalido()
 
             else:
                 token_invalido()
+
         else:
             nome_da_conta.value = ''
             access_token_label.value = ''
@@ -145,7 +149,7 @@ def main(page: ft.Page):
             "Authorization": f"Bearer {access_token_var}",
         }
 
-        resposta = requests.request("PUT", url=url, headers=headers, data=payload)
+        resposta = requests.put(url=url, headers=headers, data=payload)
 
         page.update()
 
@@ -157,6 +161,7 @@ def main(page: ft.Page):
         else:
             if type(valor_atualizar) is int:
                 retorno = f'{produto} | Estoque alterado para {valor_atualizar}'
+
             else:
                 valor_imprimir = valor_atualizar.replace('.', ',')
                 retorno = f'{produto} | Preço alterado para R$ {valor_imprimir}'
@@ -181,6 +186,7 @@ def main(page: ft.Page):
                         escrever = atualizar(produto, valor_atualizar, access_token_var)
                         lista_resultado.controls.append(escrever)
                         page.update()
+
                 else:
 
                     while quantidade_de_an > 0:
@@ -384,10 +390,8 @@ def main(page: ft.Page):
 
     # Text
     texto_do_inicio = ft.Text(
-        f'Atualizar estoque ou preço dos produtos no Mercado Livre \nv0.0.5.1', size=14,
-        color='blue',
-        weight='bold'
-    )
+        f'Atualizar estoque ou preço dos produtos no Mercado Livre \n'
+        f'v0.0.5.1', size=14, color='blue', weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
     # ProgressRing
