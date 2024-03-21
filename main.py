@@ -61,13 +61,6 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    'Access-Control-Allow-Headers': 'Content-Type',
-                    "Content-Type": "application/json",
-
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Credentials": "true",
-
-                    "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
                     "Authorization": f"Bearer {access_token_label.value}"
                 }
 
@@ -117,15 +110,9 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            'Access-Control-Allow-Headers': 'Content-Type',
-            "Content-Type": "application/json",
-
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-
-            "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization": f"Bearer {access_token_var}"
         }
+
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
@@ -156,13 +143,6 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            'Access-Control-Allow-Headers': 'Content-Type',
-            "Content-Type": "application/json",
-
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-
-            "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization": f"Bearer {access_token_var}"
         }
 
