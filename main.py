@@ -61,6 +61,7 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
+                    "Access-Control-Allow-Origin": "https://luarco.com.br/",
                     "Authorization": f"Bearer {access_token_label.value}"
                 }
 
@@ -110,7 +111,8 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            "Authorization": f"Bearer {access_token_var}"
+            "Access-Control-Allow-Origin": "https://luarco.com.br/",
+            "Authorization": f"Bearer {access_token_label.value}"
         }
 
 
@@ -143,7 +145,8 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            "Authorization": f"Bearer {access_token_var}"
+            "Access-Control-Allow-Origin": "https://luarco.com.br/",
+            "Authorization": f"Bearer {access_token_label.value}"
         }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
