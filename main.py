@@ -61,10 +61,11 @@ def main(page: ft.Page):
                 btn_voltar_home.disabled = True
                 page.update()
                 headers = {
-                    "access-control-allow-headers": "access-control-allow-origin",
-                    "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
                     "Access-Control-Allow-Origin": "*",
-                    "Authorization": f"Bearer {access_token_label.value}",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Content-Type": "application/json",
+                    "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+                    "Authorization": f"Bearer {access_token_label.value}"
                 }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -116,6 +117,7 @@ def main(page: ft.Page):
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
             "Content-Type": "application/json",
+            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
             "Authorization": f"Bearer {access_token_label.value}"
         }
 
@@ -148,7 +150,10 @@ def main(page: ft.Page):
 
         headers = {
             "Access-Control-Allow-Origin": "*",
-            "Authorization": f"Bearer {access_token_var}",
+            "Access-Control-Allow-Credentials": "true",
+            "Content-Type": "application/json",
+            "access-control-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+            "Authorization": f"Bearer {access_token_label.value}"
         }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
@@ -393,7 +398,7 @@ def main(page: ft.Page):
     # Text
     texto_do_inicio = ft.Text(
         f'Atualizar estoque ou preço dos produtos no Mercado Livre \n'
-        f'v0.0.5.1', size=14, color='blue', weight='bold')
+        f'v0.0.5.2', size=14, color='blue', weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
     # ProgressRing
