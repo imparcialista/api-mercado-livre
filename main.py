@@ -64,9 +64,9 @@ def main(page: ft.Page):
                 page.update()
 
                 headers = {
-                    'Access-Control-Request-Method:' : 'GET',
-                    "Access-Control-Allow-Origin": "https://luarco.com.br/",
-                    "Authorization": f"Bearer {access_token_label.value}"
+                    'Access-Control-Request-Method:': 'OPTIONS,GET,POST,PUT',
+                    "Access-Control-Allow-Origin"   : "https://luarco.com.br",
+                    "Authorization"                 : f"Bearer {access_token_label.value}"
                     }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -115,8 +115,8 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            'Access-Control-Request-Method:': 'GET',
-            "Access-Control-Allow-Origin"   : "https://luarco.com.br/",
+            'Access-Control-Request-Method:': 'OPTIONS,GET,POST,PUT',
+            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
             "Authorization"                 : f"Bearer {access_token_label.value}"
             }
 
@@ -149,8 +149,9 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            "Access-Control-Allow-Origin": "https://luarco.com.br",
-            "Authorization": f"Bearer {access_token_label.value}"
+            'Access-Control-Request-Method:': 'OPTIONS,GET,POST,PUT',
+            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
+            "Authorization"                 : f"Bearer {access_token_label.value}"
             }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
