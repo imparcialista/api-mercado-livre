@@ -70,7 +70,7 @@ def main(page: ft.Page):
                     'access-control-request-method'     : "PUT,GET,POST,DELETE,OPTIONS",
                     "authorization"                     : f"Bearer {access_token_label.value}"
                     }
-
+                resposta_1 = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
                 msg_erro.value = resposta.status_code
@@ -124,6 +124,7 @@ def main(page: ft.Page):
             "authorization"                : f"Bearer {access_token_label.value}"
             }
 
+        resposta_1 = requests.request("GET", url=url, headers=headers, data=payload)
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
         if resposta.status_code == 200:
@@ -160,6 +161,7 @@ def main(page: ft.Page):
             "authorization"                : f"Bearer {access_token_label.value}"
             }
 
+        resposta_1 = requests.put(url=url, headers=headers, data=payload)
         resposta = requests.put(url=url, headers=headers, data=payload)
 
         page.update()
