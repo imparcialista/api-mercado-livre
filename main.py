@@ -2,8 +2,8 @@ import flet as ft
 import requests
 import json
 
-
 # Obs: o scroll não está funcionando
+
 
 def main(page: ft.Page):
     page.scroll = 'always'
@@ -22,11 +22,13 @@ def main(page: ft.Page):
             ft.ThemeMode.DARK
             if page.theme_mode == ft.ThemeMode.LIGHT
             else ft.ThemeMode.LIGHT
-        )
+            )
         icone.icon = (
             'LIGHT_MODE_SHARP' if page.theme_mode == ft.ThemeMode.LIGHT else 'DARK_MODE'
-        )
+            )
+
         page.update()
+
 
     icone = ft.IconButton(
         icon=ft.icons.DARK_MODE,
@@ -60,10 +62,12 @@ def main(page: ft.Page):
                 btn_salvar.disabled = True
                 btn_voltar_home.disabled = True
                 page.update()
+
                 headers = {
+                    'Access-Control-Request-Method:' : 'GET',
                     "Access-Control-Allow-Origin": "https://luarco.com.br/",
                     "Authorization": f"Bearer {access_token_label.value}"
-                }
+                    }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
 
@@ -111,10 +115,10 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            "Access-Control-Allow-Origin": "https://luarco.com.br/",
-            "Authorization": f"Bearer {access_token_label.value}"
-        }
-
+            'Access-Control-Request-Method:': 'GET',
+            "Access-Control-Allow-Origin"   : "https://luarco.com.br/",
+            "Authorization"                 : f"Bearer {access_token_label.value}"
+            }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
 
@@ -145,9 +149,9 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            "Access-Control-Allow-Origin": "https://luarco.com.br/",
+            "Access-Control-Allow-Origin": "https://luarco.com.br",
             "Authorization": f"Bearer {access_token_label.value}"
-        }
+            }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
 
@@ -327,8 +331,8 @@ def main(page: ft.Page):
                 [
                     ft.AppBar(title=ft.Text('Aplicativo Luarco'), bgcolor=ft.colors.SURFACE_VARIANT),
                     inicio, info_conta, botoes_conta, valores, botoes, msg_erro, lista
-                ], )
-        )
+                    ], )
+            )
 
         if page.route == '/trocarconta':
             access_token_label.error_text = ''
@@ -340,7 +344,7 @@ def main(page: ft.Page):
                     [
                         ft.AppBar(title=ft.Text('Alterar conta'), bgcolor=ft.colors.SURFACE_VARIANT),
                         access, nome_da_conta, id_vendedor, botoes_nav,
-                    ], ),
+                        ], ),
             )
             page.update()
         page.update()
@@ -356,7 +360,7 @@ def main(page: ft.Page):
                             bgcolor=ft.colors.SURFACE_VARIANT
                         ),
                         nome_da_conta, btn_voltar_home,
-                    ], ),
+                        ], ),
             )
             page.update()
 
@@ -371,16 +375,19 @@ def main(page: ft.Page):
     # ElevatedButton
     btn_voltar_home = ft.ElevatedButton(
         'Voltar', on_click=lambda _: page.go('/'), width=150, height=50, icon='ARROW_BACK'
-    )
+        )
+
     btn_salvar = ft.ElevatedButton('Salvar', on_click=salvar, width=150, height=50, icon='SAVE')
     btn_alterar_conta = ft.ElevatedButton(
         'Alterar conta', on_click=lambda _: page.go('/trocarconta'),
         height=50, icon='ACCOUNT_CIRCLE'
-    )
+        )
+
     btn_config = ft.ElevatedButton(
         'Configurações', on_click=lambda _: page.go('/configuracoes'),
         height=50, icon='SETTINGS'
-    )
+        )
+
     btn_atualizar = ft.ElevatedButton('Atualizar', on_click=btn_click, height=50, icon='UPDATE')
     btn_buscar = ft.ElevatedButton('Buscar', height=50, icon='SEARCH', disabled=True)
     btn_limpar_label = ft.ElevatedButton('Limpar', on_click=btn_limpar, height=50, icon='DELETE')
