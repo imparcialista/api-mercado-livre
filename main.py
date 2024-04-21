@@ -64,9 +64,11 @@ def main(page: ft.Page):
                 page.update()
 
                 headers = {
-                    'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-                    "Access-Control-Allow-Origin"   : "https://luarco.com.br/trocarconta",
-                    "Authorization"                 : f"Bearer {access_token_label.value}"
+                    "access-control-allow-origin"       : "https://luarco.com.br",
+                    "access-control-allow-headers"      : "access-control-allow-origin,authorization",
+                    "access-control-allow-methods"      : "PUT,GET,POST,DELETE,OPTIONS",
+                    'access-control-request-method'     : "PUT,GET,POST,DELETE,OPTIONS",
+                    "authorization"                     : f"Bearer {access_token_label.value}"
                     }
 
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -115,9 +117,11 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
-            "Authorization"                 : f"Bearer {access_token_label.value}"
+            "access-control-allow-origin"  : "https://luarco.com.br",
+            "access-control-allow-headers" : "access-control-allow-origin,authorization",
+            "access-control-allow-methods" : "PUT,GET,POST,DELETE,OPTIONS",
+            'access-control-request-method': "PUT,GET,POST,DELETE,OPTIONS",
+            "authorization"                : f"Bearer {access_token_label.value}"
             }
 
         resposta = requests.request("GET", url=url, headers=headers, data=payload)
@@ -149,9 +153,11 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
-            "Authorization"                 : f"Bearer {access_token_label.value}"
+            "access-control-allow-origin"  : "https://luarco.com.br",
+            "access-control-allow-headers" : "access-control-allow-origin,authorization",
+            "access-control-allow-methods" : "PUT,GET,POST,DELETE,OPTIONS",
+            'access-control-request-method': "PUT,GET,POST,DELETE,OPTIONS",
+            "authorization"                : f"Bearer {access_token_label.value}"
             }
 
         resposta = requests.put(url=url, headers=headers, data=payload)
