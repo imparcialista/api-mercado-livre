@@ -65,7 +65,7 @@ def main(page: ft.Page):
 
                 headers = {
                     'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-                    "Access-Control-Allow-Origin"   : "*",
+                    "Access-Control-Allow-Origin"   : "https://luarco.com.br/trocarconta",
                     "Authorization"                 : f"Bearer {access_token_label.value}"
                     }
 
@@ -116,7 +116,7 @@ def main(page: ft.Page):
         payload = {}
         headers = {
             'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-            "Access-Control-Allow-Origin"   : "*",
+            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
             "Authorization"                 : f"Bearer {access_token_label.value}"
             }
 
@@ -150,7 +150,7 @@ def main(page: ft.Page):
 
         headers = {
             'Access-Control-Request-Method': 'OPTIONS,GET,POST,PUT',
-            "Access-Control-Allow-Origin"   : "",
+            "Access-Control-Allow-Origin"   : "https://luarco.com.br",
             "Authorization"                 : f"Bearer {access_token_label.value}"
             }
 
