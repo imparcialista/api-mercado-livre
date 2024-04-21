@@ -64,11 +64,11 @@ def main(page: ft.Page):
                 page.update()
 
                 headers = {
-                    "access-control-allow-origin"       : "https://luarco.com.br",
-                    "access-control-allow-headers"      : "access-control-allow-origin,authorization",
-                    "access-control-allow-methods"      : "PUT,GET,POST,DELETE,OPTIONS",
-                    'access-control-request-method'     : "PUT,GET,POST,DELETE,OPTIONS",
-                    "authorization"                     : f"Bearer {access_token_label.value}"
+                    "Access-Control-Request-Method" : "PUT,GET,POST,DELETE,OPTIONS",
+                    "Access-Control-Request-Headers": "Content-Type",
+                    "access-control-allow-headers"  : "access-control-allow-origin,authorization",
+                    "access-control-allow-origin"   : "*",
+                    "authorization"                 : f"Bearer {access_token_label.value}"
                     }
                 resposta_1 = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
                 resposta = requests.get('https://api.mercadolibre.com/users/me', headers=headers)
@@ -117,10 +117,10 @@ def main(page: ft.Page):
 
         payload = {}
         headers = {
-            "access-control-allow-origin"  : "https://luarco.com.br",
+            "Access-Control-Request-Method": "PUT,GET,POST,DELETE,OPTIONS",
+            "Access-Control-Request-Headers": "Content-Type",
             "access-control-allow-headers" : "access-control-allow-origin,authorization",
-            "access-control-allow-methods" : "PUT,GET,POST,DELETE,OPTIONS",
-            'access-control-request-method': "PUT,GET,POST,DELETE,OPTIONS",
+            "access-control-allow-origin": "*",
             "authorization"                : f"Bearer {access_token_label.value}"
             }
 
@@ -154,10 +154,10 @@ def main(page: ft.Page):
             payload = json.dumps({"price": valor_atualizar})
 
         headers = {
-            "access-control-allow-origin"  : "https://luarco.com.br",
+            "Access-Control-Request-Method": "PUT,GET,POST,DELETE,OPTIONS",
+            "Access-Control-Request-Headers": "Content-Type",
             "access-control-allow-headers" : "access-control-allow-origin,authorization",
-            "access-control-allow-methods" : "PUT,GET,POST,DELETE,OPTIONS",
-            'access-control-request-method': "PUT,GET,POST,DELETE,OPTIONS",
+            "access-control-allow-origin": "*",
             "authorization"                : f"Bearer {access_token_label.value}"
             }
 
@@ -407,7 +407,7 @@ def main(page: ft.Page):
     # Text
     texto_do_inicio = ft.Text(
         f'Atualizar estoque ou preço dos produtos no Mercado Livre \n'
-        f'v0.0.5.2', size=14, color='blue', weight='bold')
+        f'v0.0.5.3', size=14, color='blue', weight='bold')
     msg_erro = ft.Text(f'', size=15, color='red', weight='bold')
 
     # ProgressRing
