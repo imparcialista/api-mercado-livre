@@ -615,6 +615,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                 
                 mensagem = (f'Pode ser vendido por: R$ {preco_imprimir(novo_valor)}. Desconto atual: R$ '
                             f'{preco_imprimir(prc_prd)}')
+                msg(mensagem)
                 modo_safe = True
 
                 if modo_safe:
