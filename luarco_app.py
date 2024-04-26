@@ -400,8 +400,11 @@ def gerar_planilha(tv):
 
 
 def preco_imprimir(preco):
-    preco = float(preco)
-    preco = f'{preco:.2f}'
+
+    try:
+        preco = float(preco)
+    except:
+        pass
 
     preco = str(preco)
     preco = preco.replace('.', ',')
@@ -490,8 +493,15 @@ def atualizar(produto, valor_atualizar, tv, tipo):
 
     if tipo == 'estoque':
         est_prd = info_prd['available_quantity']
+
+        mini_espera = False
         if valor_atualizar <= 0:
             valor_atualizar = 0
+            if est_prd > 0:
+                mini_espera = True
+        else:
+            if est_prd <= 0:
+                mini_espera = True
 
         # Produtos do full não podem ser alterados
         if info_prd['shipping'] == 'Full':
@@ -516,6 +526,9 @@ def atualizar(produto, valor_atualizar, tv, tipo):
 
         if resposta.status_code == 200:
             mensagem = f'Estoque alterado de {est_prd} para {valor_atualizar}'
+            if mini_espera:
+                time.sleep(3)
+
             linha_ret = retorno_linha(mensagem, sucesso, linha_ret)
             return linha_ret
 
@@ -788,8 +801,6 @@ def main():
 
             gerar_planilha(token)
 
-            msg(mensagem_base)
-
         elif escolha == '3' or escolha == 'abrir planilha':
             if token == '':
                 token = configurar_conta()
@@ -815,8 +826,6 @@ def main():
             msg('Abrindo o arquivo...')
             os.startfile(path)
             msg('Arquivo aberto')
-
-            msg(mensagem_base)
 
         elif escolha == '4' or escolha == 'atualizador':
             if token == '':
@@ -936,8 +945,6 @@ def main():
 
                 break
 
-            msg(mensagem_base)
-
         elif escolha == '5' or escolha == 'atualizar por planilha':
             if token == '':
                 token = configurar_conta()
@@ -1020,7 +1027,7 @@ def main():
 
                     else:
                         msg_alerta('A planilha não segue um padrão para que seja atualizado')
-                        break
+                        continue
 
                 else:
                     msg_alerta('A planilha não segue um padrão para que seja atualizado')
@@ -1099,7 +1106,6 @@ def main():
                                 valor_mlb = [valor_mlb, valor_desconto]
                                 registro_est = pegar_produtos(sku_mlb, est_mlb, token, 'estoque')
                                 registros.append(registro_est)
-                                time.sleep(1)
 
                             if planilha_des:
                                 valor_mlb = [valor_mlb, valor_desconto]
@@ -1224,7 +1230,6 @@ def main():
 
             df_cat.to_excel(f'Categoria-{categoria}.xlsx', index=True)
             print(f'Arquivo gerado Categoria-{categoria}.xlsx')
-            msg(mensagem_base)
 
         else:
             print()
