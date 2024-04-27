@@ -122,7 +122,7 @@ def configurar_conta():
 
         if resposta.status_code == 200:
             os.system('CLS')
-            msg_destaque('Programa feito por @imparcialista  v1.2.3')
+            msg_destaque('Programa feito por @imparcialista  v1.2.4')
             msg(f'Conta conectada: {nome_conta(tv)}')
             msg(mensagem_base)
             return tv
