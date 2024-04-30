@@ -53,7 +53,7 @@ def pegar_datas():
 
 
 def msg_dif(cor, lugar, mensagem):
-    linha = f'{'-' * (len(mensagem))}\n'
+    linha = f'{"-" * (len(mensagem))}\n'
 
     texto = f'{mensagem}'
 
@@ -506,7 +506,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
         # Produtos do full não podem ser alterados
         if info_prd['shipping'] == 'Full':
             mensagem = f'Estoque no Full'
-            linha_ret = retorno_linha(mensagem, normal, linha_ret)
+            linha_ret = retorno_linha(mensagem, aviso, linha_ret)
             return linha_ret
 
         # Não vamos trocar um valor pelo mesmo valor, nós apenas deixamos como está
@@ -790,7 +790,6 @@ def main():
 
         elif escolha == '?' or escolha == 'ajuda':
             msg('Digite SAIR para encerrar')
-            msg(mensagem_base)
 
         elif escolha == '1' or escolha == 'trocar de conta':
             token = configurar_conta()
@@ -1033,7 +1032,7 @@ def main():
                     msg_alerta('A planilha não segue um padrão para que seja atualizado')
                     continue
 
-                msg(f'\n{len(df_atualizar['SKU'])} SKUs para atualizar\nDeseja continuar?\n[1] Sim | [2] Não')
+                msg(f'\n{len(df_atualizar["SKU"])} SKUs para atualizar\nDeseja continuar?\n[1] Sim | [2] Não')
                 continuar = input(str('> '))
 
                 if continuar == '1':
