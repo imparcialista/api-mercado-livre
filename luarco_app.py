@@ -537,40 +537,6 @@ def atualizar(produto, valor_atualizar, tv, tipo):
             linha_ret = retorno_linha(mensagem, erro, linha_ret)
             return linha_ret
 
-    elif tipo == 'preço':
-        prc_prd = info_prd['price']
-        prc_org_prd = info_prd['original_price']
-        prc_org_prd = str(prc_org_prd)
-
-        # Não vamos trocar um valor pelo mesmo valor, nós apenas deixamos como está
-        if valor_atualizar == prc_prd:
-            mensagem = f'Preço correto'
-            linha_ret = retorno_linha(mensagem, normal, linha_ret)
-            return linha_ret
-
-        # Caso contrário, vamos informar o desconto que está ativo e não atualizar
-        if prc_org_prd != 'None' and prc_org_prd != 'Null':
-            mensagem = f'Desconto ativo: De R$ {preco_imprimir(prc_org_prd)} por R$ {preco_imprimir(prc_prd)}'
-            linha_ret = retorno_linha(mensagem, normal, linha_ret)
-            return linha_ret
-
-        # Caso o valor de preço original esteja vazio, podemos atualizar
-        else:
-            payload = json.dumps({'price': valor_atualizar})
-
-        headers = {'Authorization': f'Bearer {tv}'}
-        resposta = requests.put(url=url, headers=headers, data=payload)
-
-        if resposta.status_code == 200:
-            mensagem = f'Preço alterado de R$ {preco_imprimir(prc_prd)} para R$ {preco_imprimir(valor_atualizar)}'
-            linha_ret = retorno_linha(mensagem, sucesso, linha_ret)
-            return linha_ret
-
-        else:
-            mensagem = f'Não pôde ser alterado'
-            linha_ret = retorno_linha(mensagem, erro, linha_ret)
-            return linha_ret
-
     elif tipo == 'sku':
         payload = json.dumps({'attributes': [{'id': 'SELLER_SKU', 'value_name': f'{valor_atualizar}'}]})
 
@@ -629,12 +595,17 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                 mensagem = (f'Pode ser vendido por: R$ {preco_imprimir(novo_valor)}. Desconto atual: R$ '
                             f'{preco_imprimir(prc_prd)}')
                 msg(mensagem)
-                modo_safe = True
+
+                modo_safe = False
+                modo_auto_alterar = False
 
                 if modo_safe:
                     deseja_atualizar = input(str('Envie 1 se deseja alterar\n> '))
                 else:
-                    deseja_atualizar = '1'
+                    if modo_auto_alterar:
+                        deseja_atualizar = '1'
+                    else:
+                        deseja_atualizar = '2'
 
                 if deseja_atualizar == '1':
                     url = f'{base}/seller-promotions/items/{produto}?promotion_type=PRICE_DISCOUNT&app_version=v2'
@@ -719,6 +690,87 @@ def atualizar(produto, valor_atualizar, tv, tipo):
             mensagem = f'Não pôde ser alterado'
             linha_ret = retorno_linha(mensagem, erro, linha_ret)
             return linha_ret
+
+    elif tipo == 'preço':
+        supermercado = False
+        if type(valor_atualizar) is list:
+            valor_mercado_livre = valor_atualizar[0]
+            valor_supermercado = valor_atualizar[1]
+
+            if 'supermarket_eligible' in info_prd['tags']:
+                novo_valor = valor_supermercado
+                supermercado = True
+            else:
+                supermercado = False
+                novo_valor = valor_mercado_livre
+        else:
+            novo_valor = valor_atualizar
+
+        prc_prd = info_prd['price']
+        prc_org_prd = info_prd['original_price']
+        prc_org_prd = str(prc_org_prd)
+
+        if status != 'Ativo':
+            mensagem = f'Anúncio inativo'
+            linha_ret = retorno_linha(mensagem, normal, linha_ret)
+            return linha_ret
+
+        # Produto possui desconto
+        if prc_org_prd != 'None' and prc_org_prd != 'Null':
+            prc_comparar = prc_prd
+
+            if float(novo_valor) < prc_comparar:
+                if not supermercado:
+                    if prc_comparar < 79 and frete == 'Grátis':
+                        input('Produto com frete grátis abaixo de 79, por favor altere.\nAperte ENTER para continuar')
+
+                    if prc_comparar >= 79:
+                        if novo_valor < 79:
+                            mensagem = f'Não alterar: Desconto abaixo do valor de frete grátis'
+                            linha_ret = retorno_linha(mensagem, normal, linha_ret)
+                            return linha_ret
+
+                mensagem = (f'Pode ser vendido por: R$ {preco_imprimir(novo_valor)}. Desconto atual: R$ '
+                            f'{preco_imprimir(prc_prd)}')
+                msg(mensagem)
+
+                linha_ret = retorno_linha(mensagem, normal, linha_ret)
+                return linha_ret
+            else:
+                mensagem = f'Promoção ativa: De R$ {preco_imprimir(prc_org_prd)} por R$ {preco_imprimir(prc_prd)}'
+                linha_ret = retorno_linha(mensagem, normal, linha_ret)
+                return linha_ret
+
+        elif prc_prd == valor_atualizar:
+            mensagem = f'Preço correto'
+            linha_ret = retorno_linha(mensagem, normal, linha_ret)
+            return linha_ret
+
+        else:
+            if not supermercado:
+                if prc_prd < 79 and frete == 'Grátis':
+                    input('Produto com frete grátis abaixo de 79, por favor altere.\nAperte ENTER para continuar')
+
+                if prc_prd >= 79:
+                    if novo_valor < 79:
+                        mensagem = f'Não alterar: Desconto abaixo do valor de frete grátis'
+                        linha_ret = retorno_linha(mensagem, normal, linha_ret)
+                        return linha_ret
+
+            payload = json.dumps({'price': valor_atualizar})
+
+            headers = {'Authorization': f'Bearer {tv}'}
+            resposta = requests.put(url=url, headers=headers, data=payload)
+
+            if resposta.status_code == 200:
+                mensagem = f'Preço alterado de R$ {preco_imprimir(prc_prd)} para R$ {preco_imprimir(valor_atualizar)}'
+                linha_ret = retorno_linha(mensagem, sucesso, linha_ret)
+                return linha_ret
+
+            else:
+                mensagem = f'Não pôde ser alterado'
+                linha_ret = retorno_linha(mensagem, erro, linha_ret)
+                return linha_ret
 
 
 def pegar_produtos(sku, valor_atualizar, tv, tipo):
