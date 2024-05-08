@@ -108,6 +108,56 @@ def fazer_reqs(url, tv):
 
         else:
             resposta = resposta.json()
+            # print(resposta)
+            return resposta
+
+
+def fazer_post(id_mlb, tv1, tv2):
+    url_id = f'{base}/items/{id_mlb}'
+    corpo_prd = fazer_reqs(url_id, tv1)
+
+    url_id = f'{base}/items'
+
+    lista_nao_pode = ['original_price', 'deal_ids', 'descriptions', 'seller_contact', 'id', 'seller_id', 'thumbnail',
+                      'last_updated', 'inventory_id', 'permalink', 'differential_pricing', 'stop_time',
+                      'sold_quantity', 'user_product_id', 'item_relations', 'variations', 'base_price', 'sub_status',
+                      'initial_quantity', 'date_created', 'expiration_time', 'warnings', 'end_time', 'health',
+                      'listing_source', 'international_delivery_mode', 'thumbnail_id', 'parent_item_id', 'geolocation']
+
+    lista_pode = []
+    for var in corpo_prd:
+        if var in lista_nao_pode:
+            print(f'Não pode: {var}')
+        else:
+            print(f'pode: {var}')
+            nome_var = var
+            linha = corpo_prd[f'{nome_var}']
+
+            lista_pode.append([var, linha])
+
+    print(lista_pode)
+    payload = json.dumps(lista_pode)
+    headers = {'Authorization': f'Bearer {tv2}'}
+
+    resposta = requests.request('POST', url=url_id, headers=headers, data=payload)
+    print(resposta.json())
+
+    tentativa = 1
+    while tentativa < 12:
+        if resposta.status_code != 201:
+            print(resposta)
+            if tentativa == 11:
+                msg_alerta('Número máximo de tentativas excedido')
+                quit()
+
+            else:
+                msg_aviso(f'Tentativa {tentativa} | Falha na requisição')
+                tentativa += 1
+                time.sleep(1)
+
+        else:
+            resposta = resposta.json()
+            print(resposta)
             return resposta
 
 
@@ -596,7 +646,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                             f'{preco_imprimir(prc_prd)}')
                 msg(mensagem)
 
-                modo_safe = False
+                modo_safe = True
                 modo_auto_alterar = False
 
                 if modo_safe:
@@ -832,6 +882,7 @@ def main():
     os.system('CLS')
     sair = False
     token = configurar_conta()
+    token_2 = ''
 
     while not sair:
         escolha = get_input()
@@ -1281,6 +1332,33 @@ def main():
 
             df_cat.to_excel(f'Categoria-{categoria}.xlsx', index=True)
             print(f'Arquivo gerado Categoria-{categoria}.xlsx')
+
+        elif escolha == '7':
+            if token == '':
+                print('Configure o primeiro token')
+                token = configurar_conta()
+
+            print(f'Primeiro Token configurado: {token}')
+
+            if token_2 == '':
+                print('Configure o segundo token')
+                token_2 = configurar_conta()
+
+            print(f'Segundo Token configurado: {token_2}')
+
+            planilha_atualizar = dlg.askopenfilename(filetypes=[('Arquivos excel', '.xlsx')])
+
+            msg(f'Caminho do arquivo: {planilha_atualizar}')
+            df_atualizar = pd.read_excel(planilha_atualizar)
+
+            lista_id = []
+
+            if df_atualizar.columns[0] == 'id':
+                for id_df in df_atualizar['id']:
+                    lista_id.append(id_df)
+
+            for id_mlb in lista_id:
+                fazer_post(id_mlb, token, token_2)
 
         else:
             print()
