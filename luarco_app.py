@@ -118,47 +118,61 @@ def fazer_post(id_mlb, tv1, tv2):
 
     url_id = f'{base}/items'
 
-    lista_nao_pode = ['original_price', 'deal_ids', 'descriptions', 'seller_contact', 'id', 'seller_id', 'thumbnail',
-                      'last_updated', 'inventory_id', 'permalink', 'differential_pricing', 'stop_time',
-                      'sold_quantity', 'user_product_id', 'item_relations', 'variations', 'base_price', 'sub_status',
-                      'initial_quantity', 'date_created', 'expiration_time', 'warnings', 'end_time', 'health',
-                      'listing_source', 'international_delivery_mode', 'thumbnail_id', 'parent_item_id', 'geolocation']
+    lista_nao_pode = [
+        'original_price', 'deal_ids', 'descriptions', 'seller_contact', 'id', 'seller_id', 'thumbnail',
+        'last_updated', 'inventory_id', 'permalink', 'differential_pricing', 'stop_time',
+        'sold_quantity', 'user_product_id', 'item_relations', 'variations', 'base_price', 'sub_status',
+        'initial_quantity', 'date_created', 'expiration_time', 'warnings', 'end_time', 'health',
+        'listing_source', 'international_delivery_mode', 'thumbnail_id', 'parent_item_id', 'geolocation',
+        'start_time', 'shipping', 'official_store_id', 'seller_address', 'automatic_relist',
+        'tags', 'coverage_areas', 'location', 'sale_terms', 'warranty'
+        ]
 
-    lista_pode = []
-    for var in corpo_prd:
-        if var in lista_nao_pode:
-            print(f'Não pode: {var}')
+    lista_chave = []
+    lista_valor = []
+
+    for chave in corpo_prd:
+        if chave in lista_nao_pode:
+            pass
+
         else:
-            print(f'pode: {var}')
-            nome_var = var
-            linha = corpo_prd[f'{nome_var}']
+            valor = corpo_prd[f'{chave}']
+            lista_chave.append(chave)
+            lista_valor.append(valor)
 
-            lista_pode.append([var, linha])
+    atributo_chave = []
+    for inx, atributo in enumerate(lista_chave):
+        valor_atributo = lista_valor[inx]
 
-    print(lista_pode)
-    payload = json.dumps(lista_pode)
+        atributos_nao_pode = ['PACKAGE_HEIGHT', 'PRODUCT_FEATURES', 'PACKAGE_WEIGHT', 'SHIPMENT_PACKING',
+                              'PACKAGE_LENGTH', 'PACKAGE_WIDTH']
+
+        if atributo == 'attributes':
+            for item in valor_atributo:
+                if item['id'] in atributos_nao_pode:
+                    pass
+                else:
+                    atributo_chave.append(item)
+                    lista_valor[inx] = [item]
+
+    dicionario = dict(zip(lista_chave, lista_valor))
+
+    payload = json.dumps(dicionario)
     headers = {'Authorization': f'Bearer {tv2}'}
 
     resposta = requests.request('POST', url=url_id, headers=headers, data=payload)
-    print(resposta.json())
 
-    tentativa = 1
-    while tentativa < 12:
-        if resposta.status_code != 201:
-            print(resposta)
-            if tentativa == 11:
-                msg_alerta('Número máximo de tentativas excedido')
-                quit()
+    if resposta.status_code != 201:
+        resultado = 'NÃO CLONADO'
+    else:
+        resultado = 'CLONADO'
 
-            else:
-                msg_aviso(f'Tentativa {tentativa} | Falha na requisição')
-                tentativa += 1
-                time.sleep(1)
-
-        else:
-            resposta = resposta.json()
-            print(resposta)
-            return resposta
+    resposta = resposta.json()
+    # retorno = f'{resultado} | MLB: {id_mlb} | JSON: {resposta}'
+    retorno = [resultado, id_mlb, resposta]
+    print(retorno)
+    time.sleep(1)
+    return retorno
 
 
 def configurar_conta():
@@ -450,7 +464,6 @@ def gerar_planilha(tv):
 
 
 def preco_imprimir(preco):
-
     try:
         preco = float(preco)
     except:
@@ -533,6 +546,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
 
     msg_base = f'{status} | {produto} | {envio} | {frete} | {canal}'
     linha_ret = [vendedor, status, sku_prd, produto, envio, frete, canal, tit_prd]
+
 
     def retorno_linha(msg_ret, cor, lista_linha):
         msg_imprimir = f'{msg_base} | {msg_ret} | {tit_prd}'
@@ -641,7 +655,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                             mensagem = f'Não alterar: Desconto abaixo do valor de frete grátis'
                             linha_ret = retorno_linha(mensagem, normal, linha_ret)
                             return linha_ret
-                
+
                 mensagem = (f'Pode ser vendido por: R$ {preco_imprimir(novo_valor)}. Desconto atual: R$ '
                             f'{preco_imprimir(prc_prd)}')
                 msg(mensagem)
@@ -974,7 +988,8 @@ def main():
 
                                     msg_cima(f'SOLICITAÇÃO DE ALTERAÇÃO')
                                     print()
-                                    msg_dif('white', '',
+                                    msg_dif(
+                                            'white', '',
                                             f'SKU: {sku_escolhido} | Estoque: {valor_alterar}')
 
                                     pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
@@ -990,7 +1005,8 @@ def main():
                                     valor_alterar = valor_alterar.replace('.', '')
 
                                     msg_dif('white', '', f'SOLICITAÇÃO DE ALTERAÇÃO')
-                                    msg_dif('white', '',
+                                    msg_dif(
+                                            'white', '',
                                             f'SKU: {sku_escolhido} | '
                                             f'Preço: R$ {preco_imprimir(valor_alterar)}')
 
@@ -1010,7 +1026,8 @@ def main():
 
                                     msg_dif('white', '', f'SOLICITAÇÃO DE ALTERAÇÃO')
 
-                                    msg_dif('white', '',
+                                    msg_dif(
+                                            'white', '',
                                             f'SKU: {sku_escolhido} | Preço com desconto: R$'
                                             f' {preco_imprimir(valor_alterar)}')
 
@@ -1029,7 +1046,8 @@ def main():
 
                                     msg_cima(f'SOLICITAÇÃO DE ALTERAÇÃO')
                                     print()
-                                    msg_dif('white', '',
+                                    msg_dif(
+                                            'white', '',
                                             f'SKU antigo: {sku_escolhido} | SKU Novo: {valor_alterar}')
 
                                     pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
@@ -1235,9 +1253,10 @@ def main():
                         for registro_in in registro:
                             nova_lista.append(registro_in)
 
-                    nova_planilha = pd.DataFrame(nova_lista,
-                                                 columns=['Vendedor', 'Status', 'SKU', 'Código', 'Envio', 'Frete',
-                                                          'Canal', 'Título', 'Descrição'])
+                    nova_planilha = pd.DataFrame(
+                            nova_lista,
+                            columns=['Vendedor', 'Status', 'SKU', 'Código', 'Envio', 'Frete',
+                                     'Canal', 'Título', 'Descrição'])
 
                     data_registro = pegar_datas()
                     data_registro = data_registro[0]
@@ -1357,8 +1376,20 @@ def main():
                 for id_df in df_atualizar['id']:
                     lista_id.append(id_df)
 
+            lista_resultado = []
             for id_mlb in lista_id:
-                fazer_post(id_mlb, token, token_2)
+                retorno_clone = fazer_post(id_mlb, token, token_2)
+                lista_resultado.append(retorno_clone)
+
+            nova_lista = []
+
+            for item in lista_resultado:
+                nova_lista.append(item)
+
+            nova_planilha = pd.DataFrame(nova_lista, columns=['Status', 'Código', 'JSON'])
+
+            nova_planilha.to_excel('clonados.xlsx', index=False)
+            print(f'Arquivo gerado clonados.xlsx')
 
         else:
             print()
