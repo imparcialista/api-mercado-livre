@@ -20,6 +20,7 @@ mensagem_base = (
     '\n[4] Atualizar por SKU'
     '\n[5] Atualizar por planilha'
     '\n[6] Mais vendidos por categoria'
+    '\n[7] Clonar anúncios de uma conta (BETA)'
     '\n')
 
 
@@ -32,18 +33,17 @@ def pegar_datas():
     data_e_hora_sao_paulo = data_e_hora_atuais.astimezone(fuso)
 
     data_e_hora_atuais = data_e_hora_sao_paulo
-    pegar_minuto = data_e_hora_atuais.minute
+    pegar_dia = data_e_hora_atuais.day
 
-    if pegar_minuto == 59:
-        minuto = pegar_minuto
+    if pegar_dia == 1:
+        dia = pegar_dia
     else:
-        minuto = pegar_minuto + 1
+        dia = pegar_dia - 1
 
     mes = data_e_hora_atuais.month + 1
-    data_alterada = data_e_hora_atuais.replace(minute=minuto)
-    data_futuro = data_e_hora_atuais.replace(month=mes)
+    data_futuro = data_e_hora_atuais.replace(month=mes, day=dia)
 
-    data_alterada_texto = data_alterada.strftime('%Y-%m-%dT%H:%M:%S')
+    data_alterada_texto = data_e_hora_atuais.strftime('%Y-%m-%dT%H:%M:%S')
     data_futuro_texto = data_futuro.strftime('%Y-%m-%dT%H:%M:%S')
 
     datas.append(data_alterada_texto)
@@ -168,7 +168,6 @@ def fazer_post(id_mlb, tv1, tv2):
         resultado = 'CLONADO'
 
     resposta = resposta.json()
-    # retorno = f'{resultado} | MLB: {id_mlb} | JSON: {resposta}'
     retorno = [resultado, id_mlb, resposta]
     print(retorno)
     time.sleep(1)
