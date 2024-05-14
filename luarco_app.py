@@ -185,9 +185,8 @@ def configurar_conta():
 
         if resposta.status_code == 200:
             os.system('CLS')
-            msg_destaque('Programa feito por @imparcialista  v1.2.4')
+            msg_destaque('Programa feito por @imparcialista  v1.2.5')
             msg(f'Conta conectada: {nome_conta(tv)}')
-            msg(mensagem_base)
             return tv
 
         else:
@@ -474,7 +473,7 @@ def preco_imprimir(preco):
     return preco
 
 
-def atualizar(produto, valor_atualizar, tv, tipo):
+def atualizar(produto, valor_atualizar, tv, tipo, modo):
     url = f'{base}/items/{produto}'
     info_prd = fazer_reqs(url, tv)
     vendedor = nome_conta(tv)
@@ -659,13 +658,10 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                             f'{preco_imprimir(prc_prd)}')
                 msg(mensagem)
 
-                modo_safe = True
-                modo_auto_alterar = False
-
-                if modo_safe:
+                if modo == 'manual':
                     deseja_atualizar = input(str('Envie 1 se deseja alterar\n> '))
                 else:
-                    if modo_auto_alterar:
+                    if modo == 'auto_modificar':
                         deseja_atualizar = '1'
                     else:
                         deseja_atualizar = '2'
@@ -836,7 +832,7 @@ def atualizar(produto, valor_atualizar, tv, tipo):
                 return linha_ret
 
 
-def pegar_produtos(sku, valor_atualizar, tv, tipo):
+def pegar_produtos(sku, valor_atualizar, tv, tipo, modo):
     lista_feitos = []
     paginas = 0
     url = f'{base}/users/{id_conta(tv)}/items/search?seller_sku={sku}&offset={paginas}'
@@ -854,7 +850,7 @@ def pegar_produtos(sku, valor_atualizar, tv, tipo):
     else:
         if quantidade_de_an <= 50:
             for produto in resposta['results']:
-                feito = atualizar(produto, valor_atualizar, tv, tipo)
+                feito = atualizar(produto, valor_atualizar, tv, tipo, modo)
                 lista_feitos.append(feito)
 
         else:
@@ -869,7 +865,7 @@ def pegar_produtos(sku, valor_atualizar, tv, tipo):
                 resposta = fazer_reqs(url, tv)
 
                 for produto in resposta['results']:
-                    feito = atualizar(produto, valor_atualizar, tv, tipo)
+                    feito = atualizar(produto, valor_atualizar, tv, tipo, modo)
                     lista_feitos.append(feito)
 
         return lista_feitos
@@ -896,6 +892,24 @@ def main():
     sair = False
     token = configurar_conta()
     token_2 = ''
+
+    msg_cima('Na recriação promoções, você deseja')
+    msg(
+            '[1] Modificar todos anúncios automaticamente\n'
+            '[2] Prefiro escolher para cada anúncio\n'
+            '[3] Não modificar nenhum anúncio'
+            )
+    escolha_modo = get_input()
+
+    if escolha_modo == '1':
+        modo_esc = 'auto_modificar'
+    elif escolha_modo == '2':
+        modo_esc = 'manual'
+    else:
+        msg_aviso('Nenhuma promoção vai ser recriada')
+        modo_esc = 'nao_modificar'
+
+    msg(mensagem_base)
 
     while not sair:
         escolha = get_input()
@@ -960,18 +974,18 @@ def main():
                         tipo_escolhas = ['1', '2', '3', '4']
                         if tipo_desejado in tipo_escolhas:
                             if tipo_desejado == '1':
-                                tipo_escolhido = 'estoque'
+                                tipo_esc = 'estoque'
 
                             elif tipo_desejado == '2':
-                                tipo_escolhido = 'preço'
+                                tipo_esc = 'preço'
 
                             elif tipo_desejado == '3':
-                                tipo_escolhido = 'desconto'
+                                tipo_esc = 'desconto'
 
                             else:
-                                tipo_escolhido = 'sku'
+                                tipo_esc = 'sku'
 
-                            if tipo_escolhido == 'estoque':
+                            if tipo_esc == 'estoque':
                                 sku_escolhido = pegar_sku()
                                 if sku_escolhido != 'voltar':
                                     print()
@@ -991,12 +1005,12 @@ def main():
                                             'white', '',
                                             f'SKU: {sku_escolhido} | Estoque: {valor_alterar}')
 
-                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
+                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
                                 else:
                                     break
 
-                            elif tipo_escolhido == 'preço':
+                            elif tipo_esc == 'preço':
                                 sku_escolhido = pegar_sku()
                                 if sku_escolhido != 'voltar':
                                     print()
@@ -1011,12 +1025,12 @@ def main():
 
                                     valor_alterar = valor_alterar.replace(',', '.')
 
-                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
+                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
                                 else:
                                     break
 
-                            elif tipo_escolhido == 'desconto':
+                            elif tipo_esc == 'desconto':
                                 sku_escolhido = pegar_sku()
                                 if sku_escolhido != 'voltar':
                                     print()
@@ -1032,7 +1046,7 @@ def main():
 
                                     valor_alterar = valor_alterar.replace(',', '.')
 
-                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
+                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
                                 else:
                                     break
@@ -1049,7 +1063,7 @@ def main():
                                             'white', '',
                                             f'SKU antigo: {sku_escolhido} | SKU Novo: {valor_alterar}')
 
-                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_escolhido)
+                                    pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
 
                                 else:
@@ -1092,7 +1106,7 @@ def main():
 
                     if df_atualizar.columns[1] == 'Estoque':
                         msg_cima('Modo atualizar estoque por planilha selecionado')
-                        tipo_escolhido_planilha = 'estoque'
+                        tipo_esc_plan = 'estoque'
                         msg_alerta('ATENÇÃO: Produtos que estão oferecendo Full não serão alterados')
 
                         print('\nMODELO DE PLANILHA')
@@ -1104,7 +1118,7 @@ def main():
 
                     elif df_atualizar.columns[1] == 'Preço':
                         msg_cima('Modo atualizar preço por planilha selecionado')
-                        tipo_escolhido_planilha = 'preço'
+                        tipo_esc_plan = 'preço'
                         msg_alerta('ATENÇÃO: Produtos com promoção ativa não serão alterados')
 
                         print('\nMODELO DE PLANILHA')
@@ -1116,7 +1130,7 @@ def main():
 
                     elif df_atualizar.columns[1] == 'Desconto ML' or df_atualizar.columns[1] == 'Desconto SM':
                         planilha_des_e_est = True
-                        tipo_escolhido_planilha = 'desconto'
+                        tipo_esc_plan = 'desconto'
                         msg_cima('Modo atualizar desconto por planilha selecionado')
                         msg_alerta('ATENÇÃO: Produtos com promoção ativa não serão alterados')
 
@@ -1134,7 +1148,7 @@ def main():
 
                     elif df_atualizar.columns[1] == 'SKU Novo':
                         msg_cima('Modo atualizar SKUs por planilha selecionado')
-                        tipo_escolhido_planilha = 'sku'
+                        tipo_esc_plan = 'sku'
                         msg_alerta('ATENÇÃO: A troca de SKUs pode levar um tempo para ser refletida no Mercado Livre')
 
                         print('\nMODELO DE PLANILHA')
@@ -1223,13 +1237,13 @@ def main():
 
                             if planilha_des_e_est:
                                 valor_mlb = [valor_mlb, valor_desconto]
-                                registro_est = pegar_produtos(sku_mlb, est_mlb, token, 'estoque')
+                                registro_est = pegar_produtos(sku_mlb, est_mlb, token, 'estoque', modo_esc)
                                 registros.append(registro_est)
 
                             if planilha_des:
                                 valor_mlb = [valor_mlb, valor_desconto]
 
-                            registro_sku = pegar_produtos(sku_mlb, valor_mlb, token, tipo_escolhido_planilha)
+                            registro_sku = pegar_produtos(sku_mlb, valor_mlb, token, tipo_esc_plan, modo_esc)
                             registros.append(registro_sku)
 
                         else:
