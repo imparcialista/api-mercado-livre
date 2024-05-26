@@ -9,3 +9,6 @@ luarco.spec
 /Arquivos
 registro.txt
 atributos.py
+/output
+/__pycache__
+/output
