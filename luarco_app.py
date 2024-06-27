@@ -619,7 +619,10 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
         preco_original_produto = info_produto['original_price']
         preco_original_produto = str(preco_original_produto)
 
-        print(f'preco_produto: {preco_produto} | preco_original_produto: {preco_original_produto}')
+        # print(f'preco_produto: {preco_produto} | preco_original_produto: {preco_original_produto}')
+
+        preco = False
+        desconto = False
 
         if tipo == 'preço':
             preco = True
@@ -645,7 +648,7 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
                             return linha_ret
 
                 mensagem = (f'Pode ser vendido por: R$ {preco_imprimir(novo_valor)}. Desconto atual: R$ '
-                            f'{preco_imprimir(preco_produto)}')
+                            f'{preco_imprimir(preco_produto)} | {sku_produto} | {produto} | {tit_produto}')
                 msg(mensagem)
 
                 if desconto:
