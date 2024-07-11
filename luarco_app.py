@@ -568,7 +568,15 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
 
         # Podemos ter produtos com estoque, mas que estejam inativos, nesse caso, vamos tentar atualizar para ativo
         if valor_atualizar > 0:
-            payload = json.dumps({'available_quantity': valor_atualizar, 'status': 'active'})
+            payload = json.dumps(
+                    {
+                        'available_quantity': valor_atualizar, 'status': 'active',
+                        "channels"          : [
+                            "marketplace",
+                            "mshops"
+                            ]
+                        }
+                    )
         else:
             payload = json.dumps({'available_quantity': valor_atualizar})
 
@@ -639,7 +647,8 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
                 if not supermercado:
                     if preco_comparar < 79 and frete == 'Grátis':
                         input(
-                            'Produto com frete grátis abaixo de 79, por favor altere.\nAperte ENTER para continuar')
+                                'Produto com frete grátis abaixo de 79, por favor altere.\nAperte ENTER para continuar'
+                                )
 
                     if preco_comparar >= 79:
                         if novo_valor < 79:
@@ -678,7 +687,8 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
                                     'start_date'    : dt_desconto,
                                     'finish_date'   : dt_futuro,
                                     'promotion_type': 'PRICE_DISCOUNT'
-                                    })
+                                    }
+                                )
 
                         url = f'{base}/seller-promotions/items/{produto}?app_version=v2'
 
@@ -734,7 +744,7 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
                     linha_ret = retorno_linha('Não pôde ser alterado', erro, linha_ret)
                     return linha_ret
 
-            else:   # desconto = True
+            else:  # desconto = True
                 datas_desconto = pegar_datas()
 
                 dt_desconto = datas_desconto[0]
@@ -746,7 +756,8 @@ def atualizar(produto, valor_atualizar, tv, tipo, modo):
                             'start_date'    : dt_desconto,
                             'finish_date'   : dt_futuro,
                             'promotion_type': 'PRICE_DISCOUNT'
-                            })
+                            }
+                        )
 
             url = f'{base}/seller-promotions/items/{produto}?app_version=v2'
 
@@ -934,7 +945,8 @@ def main():
                                     print()
                                     msg_dif(
                                             'white', '',
-                                            f'SKU: {sku_escolhido} | Estoque: {valor_alterar}')
+                                            f'SKU: {sku_escolhido} | Estoque: {valor_alterar}'
+                                            )
 
                                     pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
@@ -952,7 +964,8 @@ def main():
                                     msg_dif(
                                             'white', '',
                                             f'SKU: {sku_escolhido} | '
-                                            f'Preço: R$ {preco_imprimir(valor_alterar)}')
+                                            f'Preço: R$ {preco_imprimir(valor_alterar)}'
+                                            )
 
                                     valor_alterar = valor_alterar.replace(',', '.')
 
@@ -973,7 +986,8 @@ def main():
                                     msg_dif(
                                             'white', '',
                                             f'SKU: {sku_escolhido} | Preço com desconto: R$'
-                                            f' {preco_imprimir(valor_alterar)}')
+                                            f' {preco_imprimir(valor_alterar)}'
+                                            )
 
                                     valor_alterar = valor_alterar.replace(',', '.')
 
@@ -992,7 +1006,8 @@ def main():
                                     print()
                                     msg_dif(
                                             'white', '',
-                                            f'SKU antigo: {sku_escolhido} | SKU Novo: {valor_alterar}')
+                                            f'SKU antigo: {sku_escolhido} | SKU Novo: {valor_alterar}'
+                                            )
 
                                     pegar_produtos(sku_escolhido, valor_alterar, token, tipo_esc, modo_esc)
                                     print()
@@ -1200,7 +1215,8 @@ def main():
                     nova_planilha = pd.DataFrame(
                             nova_lista,
                             columns=['Vendedor', 'Status', 'SKU', 'Código', 'Envio', 'Frete',
-                                     'Canal', 'Título', 'Descrição'])
+                                     'Canal', 'Título', 'Descrição']
+                            )
 
                     data_registro = pegar_datas()
                     data_registro = data_registro[0]
