@@ -15,7 +15,8 @@ mensagem_base = (
     '\n[*] Escolha uma opção'
     '\n[1] Trocar de conta'
     '\n[2] Atualizar planilha'
-    '\n[3] Abrir a planilha')
+    '\n[3] Abrir a planilha'
+    '\n[4] Exportar promoções')
 
 
 def make_request(url, tv):
@@ -545,7 +546,7 @@ def main():
             os.startfile(path)
             print('Arquivo aberto')
 
-        elif escolha == '7':
+        elif escolha == '4':
             if token == '':
                 token = configure_account()
 
