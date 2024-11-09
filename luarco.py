@@ -16,7 +16,7 @@ mensagem_base = (
     '\n[1] Trocar de conta'
     '\n[2] Atualizar planilha'
     '\n[3] Abrir a planilha'
-    '\n[4] Exportar promoções')
+    '\n[4] Exportar promoções (Desconto tradicional)')
 
 
 def make_request(url, tv):
