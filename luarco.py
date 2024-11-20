@@ -134,6 +134,7 @@ def get_all_ids(tv):
 
         for pagina in range(paginas):
             gerar_scroll(lista_scroll[pagina])
+            print(f'Página {pagina + 1}')
 
     else:
         quantidade_de_an = resposta['paging']['total']
