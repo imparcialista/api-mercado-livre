@@ -26,21 +26,27 @@ def make_request(url, tv):
         resposta = requests.get(url, headers=headers)
         resposta.raise_for_status()
 
-        if resposta.status_code == 200:
+        status_resposta = resposta.status_code
+
+        if status_resposta == 200:
             return resposta.json()
-        elif resposta.status_code == 401:
+
+        elif status_resposta == 401:
             print('Acesso não autorizado. Verifique o Access Token.')
             tv = configure_account()
             headers['Authorization'] = f'Bearer {tv}'
             return make_request(url, tv)
-        elif resposta.status_code == 404:
+
+        elif status_resposta == 404:
             print('Recurso não encontrado.')
             quit()
-        elif resposta.status_code == 500:
+
+        elif status_resposta == 500:
             print('Erro interno do servidor.')
             quit()
+
         else:
-            print(f'Status code inesperado: {resposta.status_code}')
+            print(f'Status code inesperado: {status_resposta}')
             quit()
 
     except requests.exceptions.RequestException as e:
@@ -59,7 +65,7 @@ def configure_account():
 
         if resposta.status_code == 200:
             os.system('CLS')
-            print('Programa feito por @imparcialista  v1.2.5.1')
+            print('Criado por @imparcialista  v0.1')
             print(f'Conta conectada: {resposta.json()["nickname"]}')
             return tv
         else:
@@ -156,7 +162,8 @@ def get_all_ids(tv):
         os.makedirs(f'Arquivos/{dados_conta["nickname"]}')
         print(f'Pasta {dados_conta["nickname"]} criada')
 
-    arquivo_json = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-ids_mlb.json'
+    caminho_conta = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}'
+    arquivo_json = f'{caminho_conta}-ids_mlb.json'
 
     if os.path.exists(arquivo_json):
         os.remove(arquivo_json)
@@ -172,7 +179,8 @@ def get_all_ids(tv):
 
 
 def export_to_spreadsheet(lista_json: list, colunas_drop: list, dados_conta):
-    arquivo_json = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-retorno-produtos.json'
+    caminho_conta = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}'
+    arquivo_json = f'{caminho_conta}-retorno-produtos.json'
 
     if os.path.exists(arquivo_json):
         os.remove(arquivo_json)
@@ -182,21 +190,24 @@ def export_to_spreadsheet(lista_json: list, colunas_drop: list, dados_conta):
 
     df = pd.read_json(arquivo_json)
     df = df.drop(colunas_drop, axis=1, errors='ignore')
-    planilha = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-planilha-produtos.xlsx'
+    caminho_planilha = f'{caminho_conta}-planilha-completa.xlsx'
 
-    if os.path.exists(planilha):
-        os.remove(planilha)
+    if os.path.exists(caminho_planilha):
+        os.remove(caminho_planilha)
 
     df['date_created'] = pd.to_datetime(df['date_created'], format='%d/%m/%Y %H:%M:%S')
     df['last_updated'] = pd.to_datetime(df['last_updated'], format='%d/%m/%Y %H:%M:%S')
 
     df = df.sort_values(by='status')
-    df.to_excel(planilha, index=False)
+
+    df = df.rename(columns={'attributes': 'sku'})
+
+    df.to_excel(caminho_planilha, index=False)
 
     print(f'Planilha gerada')
 
     time.sleep(1)
-    scn_df = pd.read_excel(planilha)
+    scn_df = pd.read_excel(caminho_planilha)
 
 
     def modify_tags(row):
@@ -210,14 +221,19 @@ def export_to_spreadsheet(lista_json: list, colunas_drop: list, dados_conta):
 
     columns_to_keep = [
         'id', 'title', 'price', 'original_price',
-        'available_quantity', 'attributes', 'status', 'tags'
+        'available_quantity', 'sku', 'status', 'tags'
         ]
 
     df_selected = scn_df[columns_to_keep]
-    segunda_planilha = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-segunda-planilha.xlsx'
-    df_selected.to_excel(segunda_planilha, index=False)
+    caminho_segunda_planilha = f'{caminho_conta}-planilha-resumida.xlsx'
 
-    print(f'Planilha para uso do App: {segunda_planilha}')
+    segunda_planilha = df_selected.rename(columns={'id': 'mlb', 'price': 'preço', 'available_quantity': 'estoque',
+                                                   'tags' : 'frete', 'health': 'saúde'})
+
+    # Exportar a nova planilha
+    segunda_planilha.to_excel(caminho_segunda_planilha, index=False)
+
+    print(f'Planilha para uso do App: {caminho_segunda_planilha}')
 
 
 def get_promotions(item_id, tv):
@@ -304,7 +320,8 @@ def export_promotions_to_excel(promotion_info, filename):
 
 
 def make_promotions_excel(tv, dados_conta):
-    ids_mlb = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-ids_mlb.json'
+    caminho_conta = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}'
+    ids_mlb = f'{caminho_conta}-ids_mlb.json'
 
     if not os.path.exists(ids_mlb):
         get_all_ids(tv)
@@ -347,12 +364,13 @@ def make_promotions_excel(tv, dados_conta):
         os.makedirs(f'Arquivos/{dados_conta["nickname"]}')
         print(f'Pasta {dados_conta["nickname"]} criada')
 
-    filename = f"Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-promotion_results.xlsx"
+    filename = f"{caminho_conta}-promotion_results.xlsx"
     export_promotions_to_excel(promotion_info, filename)
 
 
 def make_excel(tv, dados_conta):
-    ids_mlb = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-ids_mlb.json'
+    caminho_conta = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}'
+    ids_mlb = f'{caminho_conta}-ids_mlb.json'
     lista_retorno = []
     lista_geral = []
     gap_vinte = 0
@@ -392,9 +410,13 @@ def make_excel(tv, dados_conta):
         for grupo_de_itens in retorno:
             body = grupo_de_itens['body']
 
+            frete = body['shipping']['free_shipping']
+
+            frete = 'Grátis' if frete else 'Pago'
+
             envio = body['shipping']['logistic_type']
             if envio == 'cross_docking':
-                body['shipping'] = 'Normal'
+                body['shipping'] = frete
 
             elif envio == 'fulfillment':
                 body['shipping'] = 'Full'
@@ -524,7 +546,8 @@ def main():
             if token == '':
                 token = configure_account()
 
-            path = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}-planilha-produtos.xlsx'
+            caminho_conta = f'Arquivos/{dados_conta["nickname"]}/{dados_conta["id"]}'
+            path = f'{caminho_conta}-planilha-completa.xlsx'
 
             if not os.path.exists(path):
                 make_excel(token, dados_conta)
@@ -533,12 +556,12 @@ def main():
             df_tamanho = pd.read_excel(path)
             tamanho_planilha = len(df_tamanho['id'])
 
-            filtro_4 = ''
-            url_4 = f'{base}/users/{dados_conta["id"]}/items/search?{filtro_4}&offset={0}'
-            resposta_4 = make_request(url_4, token)
-            qtd_de_an_4 = resposta_4['paging']['total']
+            filtro = ''
+            url = f'{base}/users/{dados_conta["id"]}/items/search?{filtro}&offset={0}'
+            resposta = make_request(url, token)
+            qtd_de_an = resposta['paging']['total']
 
-            if tamanho_planilha != qtd_de_an_4:
+            if tamanho_planilha != qtd_de_an:
                 print('Gerando a planilha...')
                 make_excel(token, dados_conta)
 
@@ -550,6 +573,7 @@ def main():
             if token == '':
                 token = configure_account()
 
+            print('Iniciando busca de promoções, por favor aguarde...')
             make_promotions_excel(token, dados_conta)
 
         else:
