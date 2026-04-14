@@ -3,9 +3,13 @@
 verbose = true
 no_progress = true
 exclude_mail = true
+max_retries = 3
+retry_wait_time = 2
+timeout = 20
 accept = [200, 206, 301, 302, 403, 429]
 
-# Some providers block anonymous HEAD/GET in CI.
 exclude = [
   "https://imparcialista.github.io/api-mercado-livre/",
+  "http://127.0.0.1:8000",
+  "https://developers.mercadolivre.com.br/.*"
 ]

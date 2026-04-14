@@ -34,5 +34,5 @@ jobs:
         with:
           args: >-
             --config .lychee.toml
-            README.md docs/**/*.md
+            README.md docs
           fail: true
