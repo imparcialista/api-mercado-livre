@@ -9,6 +9,7 @@
 3. [03 - Buscar detalhes dos itens em lote](./03-detalhes-itens-lote-exportacao.md)
 4. [04 - Atualizar preço e estoque](./04-atualizar-preco-estoque.md)
 5. [05 - Tratamento de erros e limites de taxa](./05-tratamento-erros-rate-limit.md)
+6. [06 - Consultar pedidos e exportar](./06-consultar-pedidos.md)
 
 ## GitHub Pages
 

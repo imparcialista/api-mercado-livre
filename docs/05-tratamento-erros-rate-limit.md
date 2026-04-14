@@ -1,6 +1,6 @@
 # 05 - Tratamento de erros e limites de taxa (429)
 
-[Docs Home](./index.md) | [Anterior: 04](./04-atualizar-preco-estoque.md)
+[Docs Home](./index.md) | [Anterior: 04](./04-atualizar-preco-estoque.md) | [Próximo: 06](./06-consultar-pedidos.md)
 
 Para integração estável, trate erros transitórios (`429`, `5xx`, timeout) com retry e backoff.
 
@@ -38,4 +38,4 @@ Variável opcional:
 
 - [Authentication and Authorization (EN)](https://developers.mercadolivre.com.br/en_us/authentication-and-authorization)
 
-[Docs Home](./index.md) | [Anterior: 04](./04-atualizar-preco-estoque.md)
+[Docs Home](./index.md) | [Anterior: 04](./04-atualizar-preco-estoque.md) | [Próximo: 06](./06-consultar-pedidos.md)
