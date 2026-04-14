@@ -1,0 +1,81 @@
+:root {
+  --ml-brand: #ffe600;
+  --ml-ink: #1f2937;
+  --ml-blue: #2f6df6;
+  --ml-blue-dark: #1d4ed8;
+  --ml-surface: #f8fafc;
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--ml-ink);
+  --md-accent-fg-color: var(--ml-blue);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0f172a;
+  --md-default-bg-color: #0b1220;
+  --md-accent-fg-color: #7aa2ff;
+}
+
+.md-typeset h1 {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h2 {
+  margin-top: 2rem;
+  font-weight: 700;
+}
+
+.md-typeset .md-button--primary {
+  background: linear-gradient(135deg, var(--ml-blue), var(--ml-blue-dark));
+  border: 0;
+  color: #fff;
+}
+
+.md-typeset .md-button {
+  border-radius: 0.6rem;
+}
+
+.home-hero {
+  background: linear-gradient(120deg, #fff7bf 0%, #eef4ff 65%, #ffffff 100%);
+  border: 1px solid rgba(47, 109, 246, 0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.9rem;
+  margin-top: 0.8rem;
+}
+
+.home-card {
+  background: var(--ml-surface);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 0.8rem;
+  padding: 0.9rem;
+}
+
+.home-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.home-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+.md-typeset code {
+  border-radius: 0.3rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.75rem;
+}

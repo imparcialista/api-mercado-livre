@@ -8,9 +8,15 @@ edit_uri: edit/main/docs/
 docs_dir: docs
 strict: true
 
+extra_css:
+  - stylesheets/extra.css
+
 theme:
   name: material
   language: pt-BR
+  font:
+    text: IBM Plex Sans
+    code: JetBrains Mono
   icon:
     repo: fontawesome/brands/github
   features:

@@ -8,25 +8,35 @@ tags:
 
 # API Mercado Livre para Integradores
 
+<div class="home-hero" markdown>
 Guia técnico para desenvolvedores que precisam integrar sistemas à API do Mercado Livre com segurança operacional.
 
 [Repositório no GitHub](https://github.com/imparcialista/api-mercado-livre){ .md-button .md-button--primary }
+[Começar pela autenticação](./01-criar-aplicativo-e-token.md){ .md-button }
+</div>
 
 ## Trilhas de integração
 
+<div class="home-grid" markdown>
+<div class="home-card" markdown>
 ### Autenticação
 - [Capítulo 01 · Autenticação OAuth e geração de tokens](./01-criar-aplicativo-e-token.md)
-
+</div>
+<div class="home-card" markdown>
 ### Catálogo e anúncios
-- [Capítulo 02 · Consultar anúncios (items/search)](./02-primeira-consulta-anuncios.md)
-- [Capítulo 03 · Detalhes de itens em lote e exportação](./03-detalhes-itens-lote-exportacao.md)
-- [Capítulo 04 · Atualizar preço e estoque com segurança](./04-atualizar-preco-estoque.md)
-
-### Resiliência de integração
-- [Capítulo 05 · Resiliência: erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
-
+- [Capítulo 02 · Consultar anúncios](./02-primeira-consulta-anuncios.md)
+- [Capítulo 03 · Detalhes em lote](./03-detalhes-itens-lote-exportacao.md)
+- [Capítulo 04 · Atualizar preço e estoque](./04-atualizar-preco-estoque.md)
+</div>
+<div class="home-card" markdown>
+### Resiliência
+- [Capítulo 05 · Erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
+</div>
+<div class="home-card" markdown>
 ### Vendas
 - [Capítulo 06 · Consultar pedidos e exportar](./06-consultar-pedidos.md)
+</div>
+</div>
 
 ## Leitura recomendada
 
