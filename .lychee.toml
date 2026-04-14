@@ -1,6 +1,6 @@
 # Lychee config for docs link validation
 
-verbose = true
+verbose = "info"
 no_progress = true
 include_mail = false
 max_retries = 3
