@@ -1,3 +1,12 @@
+---
+title: 06 - Consultar pedidos
+description: Consulta de pedidos com /orders/search e exportação para JSON/CSV.
+tags:
+  - orders
+  - sales
+  - export
+---
+
 # 06 - Consultar pedidos (orders) e exportar resultados
 
 
@@ -75,4 +84,5 @@ Campos no CSV:
 
 - [Order management (EN)](https://developers.mercadolivre.com.br/en_us/manage-sales/order-management)
 - [Gerenciamento de vendas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/imovel-consulta-de-usuarios/gerenciamento-de-vendas)
+
 

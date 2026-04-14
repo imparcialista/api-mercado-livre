@@ -1,3 +1,12 @@
+---
+title: 01 - Criar aplicativo e gerar Access Token
+description: Fluxo OAuth para criar aplicativo, obter authorization code e gerar access token/refresh token.
+tags:
+  - auth
+  - oauth
+  - tokens
+---
+
 # 01 - Criar aplicativo e gerar Access Token
 
 
@@ -80,4 +89,5 @@ Se estiver correto, você receberá os dados do usuário autenticado.
 - [Criar aplicação no Mercado Livre](https://developers.mercadolivre.com.br/pt_br/pt_br/crie-uma-aplicacao-no-mercado-livre)
 - [Obtenção do Access Token](https://developers.mercadolivre.com.br/pt_br/obtencao-do-access-token)
 - [Autenticação e Autorização](https://developers.mercadolivre.com.br/pt_br/mensagens-post-venda/autenticacao-e-autorizacao)
+
 

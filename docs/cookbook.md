@@ -1,3 +1,12 @@
+---
+title: Cookbook
+description: Receitas operacionais prontas para tarefas comuns da API Mercado Livre.
+tags:
+  - cookbook
+  - operations
+  - recipes
+---
+
 # Cookbook
 
 Receitas rápidas para tarefas frequentes.
@@ -48,3 +57,4 @@ python examples/get_orders.py --status paid --limit 50 --max-pages 5 --sort date
 ```
 
 Saídas: `output/orders_raw.json` e `output/orders_summary.csv`.
+

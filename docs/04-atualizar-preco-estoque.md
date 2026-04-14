@@ -1,3 +1,13 @@
+---
+title: 04 - Atualizar preço e estoque
+description: Atualização segura de anúncios com dry-run, suporte a variações e retry para conflitos.
+tags:
+  - items
+  - updates
+  - pricing
+  - inventory
+---
+
 # 04 - Atualizar preço e estoque com segurança (dry-run)
 
 
@@ -70,4 +80,5 @@ python examples/update_items.py --input input/item_updates.json --apply
 - [Sincronização de publicações (PT-BR)](https://developers.mercadolivre.com.br/pt_br/produto-sincronizacao-de-publicacoes)
 - [Automatizações de preços (PT-BR)](https://developers.mercadolivre.com.br/pt_br/pessoas-interessadas/automatizacoes-de-precos)
 - [Sync and modify listings (EN)](https://developers.mercadolivre.com.br/en_us/ship-products/products-sync-listings)
+
 

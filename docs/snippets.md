@@ -1,3 +1,12 @@
+---
+title: Snippets
+description: Trechos reutilizáveis de código Python para auth, items e orders.
+tags:
+  - snippets
+  - python
+  - reference
+---
+
 # Snippets Reutilizáveis
 
 Trechos mínimos por domínio para copiar e adaptar.
@@ -24,3 +33,4 @@ Trechos mínimos por domínio para copiar e adaptar.
 
 - Pressione `S` para focar a busca rapidamente.
 - Também é possível usar `/` em navegadores que não capturam o atalho do tema.
+

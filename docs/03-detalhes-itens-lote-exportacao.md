@@ -1,3 +1,12 @@
+---
+title: 03 - Detalhes de itens em lote e exportação
+description: Busca detalhes com /items?ids e exporta CSV/XLSX com tratamento de erros por item.
+tags:
+  - items
+  - batch
+  - export
+---
+
 # 03 - Buscar detalhes dos itens em lote e exportar CSV/XLSX
 
 
@@ -65,4 +74,5 @@ Saídas geradas:
 
 - [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
 - [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
+
 

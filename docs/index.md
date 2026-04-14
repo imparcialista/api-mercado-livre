@@ -1,3 +1,11 @@
+---
+title: Início
+description: Portal da documentação da API do Mercado Livre com trilha guiada, cookbook e snippets.
+tags:
+  - home
+  - docs
+---
+
 # API Mercado Livre Docs
 
 Documentação prática para integração com a API do Mercado Livre, com foco em exemplos Python e fluxos reais de operação.
@@ -42,3 +50,4 @@ mkdocs serve
 ```
 
 A documentação local abrirá em `http://127.0.0.1:8000`.
+

@@ -1,3 +1,12 @@
+---
+title: 05 - Tratamento de erros e rate limit
+description: Estratégias de resiliência para 429/5xx, timeout e retry com backoff.
+tags:
+  - resilience
+  - rate-limit
+  - errors
+---
+
 # 05 - Tratamento de erros e limites de taxa (429)
 
 
@@ -36,4 +45,5 @@ Variável opcional:
 ## Referência oficial usada
 
 - [Authentication and Authorization (EN)](https://developers.mercadolivre.com.br/en_us/authentication-and-authorization)
+
 

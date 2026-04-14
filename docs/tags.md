@@ -1,3 +1,11 @@
+---
+title: Tags
+description: Navegação por assunto da documentação.
+tags:
+  - taxonomy
+  - navigation
+---
+
 # Tags
 
 Use esta página para navegar por assunto.
@@ -16,3 +24,4 @@ Use esta página para navegar por assunto.
 
 ## resiliencia
 - [05 - Tratamento de erros e limites de taxa](./05-tratamento-erros-rate-limit.md)
+

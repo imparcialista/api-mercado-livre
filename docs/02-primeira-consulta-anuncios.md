@@ -1,3 +1,12 @@
+---
+title: 02 - Primeira consulta de anúncios
+description: Consulta de anúncios com /users/{id}/items/search usando offset ou scan/scroll_id.
+tags:
+  - items
+  - search
+  - pagination
+---
+
 # 02 - Primeira consulta de anúncios (items/search)
 
 
@@ -78,4 +87,5 @@ Saída:
 
 - [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
 - [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
+
 
