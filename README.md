@@ -6,20 +6,28 @@ Este repositório agora é focado em documentação prática da API do Mercado L
 
 - `docs/01-criar-aplicativo-e-token.md`: criar aplicativo e gerar tokens OAuth.
 - `docs/02-primeira-consulta-anuncios.md`: primeira consulta de anúncios e paginação.
+- `docs/03-detalhes-itens-lote-exportacao.md`: detalhes de itens em lote e exportação CSV/XLSX.
 - `examples/oauth_exchange_token.py`: troca `authorization_code` por `access_token` + `refresh_token`.
 - `examples/oauth_refresh_token.py`: renova `access_token` via `refresh_token`.
 - `examples/get_user_items.py`: consulta anúncios (`offset` ou `scan`) e salva IDs.
+- `examples/get_items_details.py`: busca detalhes em lote e exporta arquivos.
 
 ## Começando
 
 1. Leia os guias em `docs/` na ordem.
-2. Instale dependências para os exemplos:
+2. Instale dependências mínimas:
 
 ```bash
 python -m pip install requests
 ```
 
-3. Execute os exemplos em `examples/` após preencher as variáveis de ambiente.
+3. Dependências opcionais para XLSX:
+
+```bash
+python -m pip install pandas openpyxl
+```
+
+4. Execute os exemplos em `examples/` após preencher as variáveis de ambiente.
 
 ## Fontes oficiais
 
