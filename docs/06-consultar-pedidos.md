@@ -1,6 +1,5 @@
 # 06 - Consultar pedidos (orders) e exportar resultados
 
-[Docs Home](./index.md) | [Anterior: 05](./05-tratamento-erros-rate-limit.md)
 
 Este capítulo mostra como buscar pedidos de vendedor usando `/orders/search` e exportar os resultados para análise.
 
@@ -77,4 +76,3 @@ Campos no CSV:
 - [Order management (EN)](https://developers.mercadolivre.com.br/en_us/manage-sales/order-management)
 - [Gerenciamento de vendas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/imovel-consulta-de-usuarios/gerenciamento-de-vendas)
 
-[Docs Home](./index.md) | [Anterior: 05](./05-tratamento-erros-rate-limit.md)

@@ -1,6 +1,5 @@
 # 04 - Atualizar preço e estoque com segurança (dry-run)
 
-[Docs Home](./index.md) | [Anterior: 03](./03-detalhes-itens-lote-exportacao.md) | [Próximo: 05](./05-tratamento-erros-rate-limit.md)
 
 Este capítulo mostra como atualizar anúncios com `PUT /items/{item_id}` usando um fluxo seguro.
 
@@ -72,4 +71,3 @@ python examples/update_items.py --input input/item_updates.json --apply
 - [Automatizações de preços (PT-BR)](https://developers.mercadolivre.com.br/pt_br/pessoas-interessadas/automatizacoes-de-precos)
 - [Sync and modify listings (EN)](https://developers.mercadolivre.com.br/en_us/ship-products/products-sync-listings)
 
-[Docs Home](./index.md) | [Anterior: 03](./03-detalhes-itens-lote-exportacao.md) | [Próximo: 05](./05-tratamento-erros-rate-limit.md)

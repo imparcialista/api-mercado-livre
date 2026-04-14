@@ -1,6 +1,5 @@
 # 02 - Primeira consulta de anúncios (items/search)
 
-[Docs Home](./index.md) | [Anterior: 01](./01-criar-aplicativo-e-token.md) | [Próximo: 03](./03-detalhes-itens-lote-exportacao.md)
 
 Neste capítulo você vai consultar os anúncios de uma conta e entender os dois modos de paginação da API.
 
@@ -80,4 +79,3 @@ Saída:
 - [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
 - [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
 
-[Docs Home](./index.md) | [Anterior: 01](./01-criar-aplicativo-e-token.md) | [Próximo: 03](./03-detalhes-itens-lote-exportacao.md)

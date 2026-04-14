@@ -3,26 +3,57 @@ site_description: Documentacao e exemplos em Python para API do Mercado Livre
 site_url: https://imparcialista.github.io/api-mercado-livre/
 repo_url: https://github.com/imparcialista/api-mercado-livre
 repo_name: imparcialista/api-mercado-livre
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+strict: true
 
 theme:
   name: material
   language: pt-BR
+  icon:
+    repo: fontawesome/brands/github
   features:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
     - content.code.copy
+    - content.action.edit
+    - content.action.view
+
+plugins:
+  - search
 
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
+  - tables
   - toc:
       permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/imparcialista/api-mercado-livre
 
 nav:
   - Início: index.md
-  - 01 Criar App e Token: 01-criar-aplicativo-e-token.md
-  - 02 Primeira Consulta: 02-primeira-consulta-anuncios.md
-  - 03 Detalhes em Lote: 03-detalhes-itens-lote-exportacao.md
-  - 04 Atualizar Preço e Estoque: 04-atualizar-preco-estoque.md
-  - 05 Erros e Rate Limit: 05-tratamento-erros-rate-limit.md
-  - 06 Consultar Pedidos: 06-consultar-pedidos.md
+  - Guias:
+      - 01 Criar App e Token: 01-criar-aplicativo-e-token.md
+      - 02 Primeira Consulta: 02-primeira-consulta-anuncios.md
+      - 03 Detalhes em Lote: 03-detalhes-itens-lote-exportacao.md
+      - 04 Atualizar Preço e Estoque: 04-atualizar-preco-estoque.md
+      - 05 Erros e Rate Limit: 05-tratamento-erros-rate-limit.md
+      - 06 Consultar Pedidos: 06-consultar-pedidos.md
