@@ -2,7 +2,7 @@
 
 verbose = true
 no_progress = true
-exclude_mail = true
+include_mail = false
 max_retries = 3
 retry_wait_time = 2
 timeout = 20
