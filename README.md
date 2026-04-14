@@ -27,6 +27,13 @@ mkdocs serve
 3. Faça push na `main`.
 4. Aguarde o workflow `Deploy Docs` concluir.
 
+## Qualidade de documentação (CI)
+
+- Workflow: `.github/workflows/docs-quality.yml`
+- Checks automáticos:
+  - `markdownlint` em `README.md` e `docs/**/*.md`
+  - `lychee` para links quebrados
+
 ## Exemplos Python
 
 Dependências mínimas:
