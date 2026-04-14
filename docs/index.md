@@ -1,53 +1,51 @@
 ---
 title: Início
-description: Portal da documentação da API do Mercado Livre com trilha guiada, cookbook e snippets.
+description: Portal da documentação da API Mercado Livre para integradores em Python.
 tags:
   - home
   - docs
 ---
 
-# API Mercado Livre Docs
+# API Mercado Livre para Integradores
 
-Documentação prática para integração com a API do Mercado Livre, com foco em exemplos Python e fluxos reais de operação.
+Guia técnico para desenvolvedores que precisam integrar sistemas à API do Mercado Livre com segurança operacional.
 
-[Ir para o repositório no GitHub](https://github.com/imparcialista/api-mercado-livre){ .md-button .md-button--primary }
+[Repositório no GitHub](https://github.com/imparcialista/api-mercado-livre){ .md-button .md-button--primary }
 
-## Trilha de aprendizado
+## Trilhas de integração
 
-### 1) Autenticação
-- [01 - Criar aplicativo e gerar Access Token](./01-criar-aplicativo-e-token.md)
+### Autenticação
+- [Capítulo 01 · Autenticação OAuth e geração de tokens](./01-criar-aplicativo-e-token.md)
 
-### 2) Catálogo e anúncios
-- [02 - Primeira consulta de anúncios](./02-primeira-consulta-anuncios.md)
-- [03 - Buscar detalhes dos itens em lote](./03-detalhes-itens-lote-exportacao.md)
-- [04 - Atualizar preço e estoque](./04-atualizar-preco-estoque.md)
+### Catálogo e anúncios
+- [Capítulo 02 · Consultar anúncios (items/search)](./02-primeira-consulta-anuncios.md)
+- [Capítulo 03 · Detalhes de itens em lote e exportação](./03-detalhes-itens-lote-exportacao.md)
+- [Capítulo 04 · Atualizar preço e estoque com segurança](./04-atualizar-preco-estoque.md)
 
-### 3) Operação resiliente
-- [05 - Tratamento de erros e limites de taxa](./05-tratamento-erros-rate-limit.md)
+### Resiliência de integração
+- [Capítulo 05 · Resiliência: erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
 
-### 4) Vendas
-- [06 - Consultar pedidos e exportar](./06-consultar-pedidos.md)
+### Vendas
+- [Capítulo 06 · Consultar pedidos e exportar](./06-consultar-pedidos.md)
 
-## Como usar esta documentação
+## Leitura recomendada
 
-!!! tip "Fluxo recomendado"
-    Siga os capítulos em ordem e execute os scripts da pasta `examples/` após configurar as variáveis de ambiente.
+1. Implemente autenticação (capítulo 01).
+2. Colete e modele catálogo (capítulos 02 e 03).
+3. Aplique atualizações com segurança (capítulo 04).
+4. Endureça resiliência de produção (capítulo 05).
+5. Integre rotinas de pedidos (capítulo 06).
 
-!!! info "Ambiente"
-    Os exemplos usam Python 3.11+ e a biblioteca `requests`.
+## Referência de apoio
 
-## Referência rápida
+- [Cookbook](./cookbook.md)
+- [Snippets](./snippets.md)
+- [Tags](./tags.md)
+- [Changelog](./changelog.md)
 
-- [Cookbook](./cookbook.md): receitas prontas para tarefas operacionais.
-- [Snippets](./snippets.md): blocos reutilizáveis por domínio.
-- [Tags](./tags.md): navegação por assunto.
-
-## Rodando localmente
+## Rodar localmente
 
 ```bash
-python -m pip install mkdocs mkdocs-material
+python -m pip install -r requirements-docs.txt
 mkdocs serve
 ```
-
-A documentação local abrirá em `http://127.0.0.1:8000`.
-

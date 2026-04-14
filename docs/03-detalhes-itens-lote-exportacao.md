@@ -1,16 +1,24 @@
 ---
-title: 03 - Detalhes de itens em lote e exportação
-description: Busca detalhes com /items?ids e exporta CSV/XLSX com tratamento de erros por item.
+title: Capítulo 03 · Detalhes de itens em lote e exportação
+description: Busca detalhes com /items?ids e exporta CSV/XLSX com tratamento de sucesso/erro por item.
 tags:
   - items
   - batch
   - export
 ---
 
-# 03 - Buscar detalhes dos itens em lote e exportar CSV/XLSX
+# Capítulo 03 · Detalhes de itens em lote e exportação
 
+## Para quem é este capítulo
+
+Para quem já tem IDs de anúncios e precisa montar base analítica para integração, pricing ou auditoria.
 
 Com os IDs coletados no capítulo 02, agora vamos buscar os detalhes dos anúncios e exportar para arquivo.
+
+## Pré-requisitos
+
+- `ML_ACCESS_TOKEN`
+- `output/item_ids.json` gerado no capítulo 02
 
 ## Endpoint
 
@@ -38,12 +46,9 @@ Headers:
 5. Exportar CSV para análise.
 6. Opcional: gerar XLSX.
 
-## Exemplo Python
+## Exemplo executável (Python)
 
 Use o script [get_items_details.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/get_items_details.py).
-
-Variáveis de ambiente obrigatórias:
-- `ML_ACCESS_TOKEN`
 
 Exemplo de execução:
 
@@ -56,7 +61,7 @@ Saídas geradas:
 - `output/items_errors.csv`
 - `output/items_details.xlsx` (se `--xlsx` e `pandas` + `openpyxl` instalados)
 
-## Campos exportados (CSV)
+## Saída esperada
 
 - `id`
 - `title`
@@ -70,7 +75,13 @@ Saídas geradas:
 - `date_created`
 - `last_updated`
 
-## Referências
+## Falhas comuns
+
+- `400`: lote inválido no parâmetro `ids`.
+- `401`: token inválido.
+- `404` por item: item inexistente ou sem acesso.
+
+## Referências oficiais
 
 - [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
 - [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)

@@ -1,18 +1,27 @@
 ---
-title: 01 - Criar aplicativo e gerar Access Token
-description: Fluxo OAuth para criar aplicativo, obter authorization code e gerar access token/refresh token.
+title: Capítulo 01 · Autenticação OAuth e geração de tokens
+description: Como registrar o app no DevCenter e executar o fluxo OAuth para obter access token e refresh token.
 tags:
   - auth
   - oauth
   - tokens
 ---
 
-# 01 - Criar aplicativo e gerar Access Token
+# Capítulo 01 · Autenticação OAuth e geração de tokens
 
+## Para quem é este capítulo
 
-Este guia cobre o fluxo OAuth 2.0 para obter credenciais de API no Mercado Livre.
+Para desenvolvedores que estão iniciando uma integração e ainda não têm credenciais válidas para chamar endpoints privados.
 
-## 1. Criar o aplicativo no DevCenter
+## Pré-requisitos
+
+- Conta no Mercado Livre com acesso ao DevCenter.
+- URL de callback (`redirect_uri`) HTTPS estável.
+- Python 3.11+ (opcional para rodar scripts do repositório).
+
+Este capítulo cobre o fluxo OAuth 2.0 para obter credenciais da API Mercado Livre.
+
+## Etapa 1 · Criar o aplicativo no DevCenter
 
 1. Acesse o DevCenter do Mercado Livre.
 2. Crie um novo aplicativo.
@@ -24,7 +33,7 @@ Este guia cobre o fluxo OAuth 2.0 para obter credenciais de API no Mercado Livre
 
 Sem `Redirect URI` correta, a autorização falha no retorno.
 
-## 2. Montar a URL de autorização
+## Etapa 2 · Montar a URL de autorização
 
 Abra no navegador uma URL como esta (ajuste domínio e parâmetros):
 
@@ -42,7 +51,7 @@ https://seu-dominio/callback?code=TG-xxxxxxxx
 
 Copie o valor de `code`.
 
-## 3. Trocar `code` por `access_token`
+## Etapa 3 · Trocar `code` por `access_token`
 
 Faça um POST para:
 
@@ -62,7 +71,7 @@ Resposta esperada inclui:
 - `refresh_token`
 - `expires_in`
 
-## 4. Renovar token com `refresh_token`
+## Etapa 4 · Renovar token com `refresh_token`
 
 Quando o `access_token` expirar, faça novo POST em `https://api.mercadolibre.com/oauth/token` com:
 - `grant_type=refresh_token`
@@ -70,7 +79,7 @@ Quando o `access_token` expirar, faça novo POST em `https://api.mercadolibre.co
 - `client_secret`
 - `refresh_token`
 
-## 5. Teste rápido do token
+## Etapa 5 · Validar o token
 
 ```bash
 curl -H "Authorization: Bearer SEU_ACCESS_TOKEN" https://api.mercadolibre.com/users/me

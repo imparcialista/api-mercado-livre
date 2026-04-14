@@ -55,12 +55,12 @@ extra:
 nav:
   - Início: index.md
   - Guias:
-      - 01 Criar App e Token: 01-criar-aplicativo-e-token.md
-      - 02 Primeira Consulta: 02-primeira-consulta-anuncios.md
-      - 03 Detalhes em Lote: 03-detalhes-itens-lote-exportacao.md
-      - 04 Atualizar Preço e Estoque: 04-atualizar-preco-estoque.md
-      - 05 Erros e Rate Limit: 05-tratamento-erros-rate-limit.md
-      - 06 Consultar Pedidos: 06-consultar-pedidos.md
+      - "Capítulo 01 · Autenticação OAuth e geração de tokens": 01-criar-aplicativo-e-token.md
+      - "Capítulo 02 · Consultar anúncios (items/search)": 02-primeira-consulta-anuncios.md
+      - "Capítulo 03 · Detalhes de itens em lote e exportação": 03-detalhes-itens-lote-exportacao.md
+      - "Capítulo 04 · Atualizar preço e estoque com segurança": 04-atualizar-preco-estoque.md
+      - "Capítulo 05 · Resiliência: erros, timeout e rate limit": 05-tratamento-erros-rate-limit.md
+      - "Capítulo 06 · Consultar pedidos e exportar": 06-consultar-pedidos.md
   - Referência:
       - Tags: tags.md
       - Cookbook: cookbook.md

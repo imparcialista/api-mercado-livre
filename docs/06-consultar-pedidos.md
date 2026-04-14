@@ -1,14 +1,22 @@
 ---
-title: 06 - Consultar pedidos
-description: Consulta de pedidos com /orders/search e exportação para JSON/CSV.
+title: Capítulo 06 · Consultar pedidos e exportar
+description: Consulta de pedidos com /orders/search usando filtros e exportação para JSON/CSV.
 tags:
   - orders
   - sales
   - export
 ---
 
-# 06 - Consultar pedidos (orders) e exportar resultados
+# Capítulo 06 · Consultar pedidos e exportar
 
+## Para quem é este capítulo
+
+Para integradores de pós-venda, BI ou conciliação financeira que precisam listar pedidos de vendedor.
+
+## Pré-requisitos
+
+- `ML_ACCESS_TOKEN`
+- `ML_SELLER_ID`
 
 Este capítulo mostra como buscar pedidos de vendedor usando `/orders/search` e exportar os resultados para análise.
 
@@ -40,7 +48,7 @@ Exemplo:
 /orders/search?seller=123456789&order.status=paid&sort=date_desc&limit=50&offset=0
 ```
 
-## Exemplo Python
+## Exemplo executável (Python)
 
 Use o script [get_orders.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/get_orders.py).
 
@@ -60,7 +68,7 @@ Com filtro de data:
 python examples/get_orders.py --status paid --date-from 2026-01-01T00:00:00.000-03:00 --date-to 2026-01-31T23:59:59.999-03:00
 ```
 
-## Saídas
+## Saída esperada
 
 - `output/orders_raw.json`: resposta consolidada.
 - `output/orders_summary.csv`: resumo por order.
@@ -80,7 +88,13 @@ Campos no CSV:
 - `seller_id`
 - `tags`
 
-## Referências
+## Falhas comuns
+
+- `400`: filtro de data mal formatado.
+- `401`: token inválido.
+- `403`: seller incompatível com o token.
+
+## Referências oficiais
 
 - [Order management (EN)](https://developers.mercadolivre.com.br/en_us/manage-sales/order-management)
 - [Gerenciamento de vendas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/imovel-consulta-de-usuarios/gerenciamento-de-vendas)

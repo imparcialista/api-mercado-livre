@@ -1,27 +1,32 @@
 ---
-title: Tags
-description: Navegação por assunto da documentação.
+title: Referência · Tags
+description: Mapa de assuntos para navegar rapidamente entre capítulos técnicos.
 tags:
   - taxonomy
   - navigation
 ---
 
-# Tags
+# Referência · Tags
 
-Use esta página para navegar por assunto.
+## Para quem é esta página
+
+Para leitura não linear da documentação, quando você já sabe o domínio (auth, items, orders, resiliência).
 
 ## auth
-- [01 - Criar aplicativo e gerar Access Token](./01-criar-aplicativo-e-token.md)
-- [05 - Tratamento de erros e limites de taxa](./05-tratamento-erros-rate-limit.md)
+
+- [Capítulo 01 · Autenticação OAuth e geração de tokens](./01-criar-aplicativo-e-token.md)
+- [Capítulo 05 · Resiliência: erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
 
 ## items
-- [02 - Primeira consulta de anúncios](./02-primeira-consulta-anuncios.md)
-- [03 - Buscar detalhes dos itens em lote](./03-detalhes-itens-lote-exportacao.md)
-- [04 - Atualizar preço e estoque](./04-atualizar-preco-estoque.md)
+
+- [Capítulo 02 · Consultar anúncios (items/search)](./02-primeira-consulta-anuncios.md)
+- [Capítulo 03 · Detalhes de itens em lote e exportação](./03-detalhes-itens-lote-exportacao.md)
+- [Capítulo 04 · Atualizar preço e estoque com segurança](./04-atualizar-preco-estoque.md)
 
 ## orders
-- [06 - Consultar pedidos e exportar](./06-consultar-pedidos.md)
+
+- [Capítulo 06 · Consultar pedidos e exportar](./06-consultar-pedidos.md)
 
 ## resiliencia
-- [05 - Tratamento de erros e limites de taxa](./05-tratamento-erros-rate-limit.md)
 
+- [Capítulo 05 · Resiliência: erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)

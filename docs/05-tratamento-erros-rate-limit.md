@@ -1,14 +1,22 @@
 ---
-title: 05 - Tratamento de erros e rate limit
-description: Estratégias de resiliência para 429/5xx, timeout e retry com backoff.
+title: Capítulo 05 · Resiliência: erros, timeout e rate limit
+description: Estratégias de resiliência para 429/5xx, timeout e retry com backoff/jitter.
 tags:
   - resilience
   - rate-limit
   - errors
 ---
 
-# 05 - Tratamento de erros e limites de taxa (429)
+# Capítulo 05 · Resiliência: erros, timeout e rate limit
 
+## Para quem é este capítulo
+
+Para times de integração que precisam aumentar estabilidade e reduzir falhas intermitentes em produção.
+
+## Pré-requisitos
+
+- Conhecimento básico de HTTP status codes.
+- Cliente HTTP com suporte a timeout e retries.
 
 Para integração estável, trate erros transitórios (`429`, `5xx`, timeout) com retry e backoff.
 
@@ -29,7 +37,7 @@ Para integração estável, trate erros transitórios (`429`, `5xx`, timeout) co
 4. Usar backoff exponencial com jitter.
 5. Logar tentativa, status e motivo da falha.
 
-## Exemplo Python (cliente reutilizável)
+## Exemplo executável (cliente reutilizável)
 
 Use [meli_http_client.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/meli_http_client.py).
 
@@ -42,7 +50,7 @@ python examples/meli_http_client.py
 Variável opcional:
 - `ML_ACCESS_TOKEN` (se definido, o exemplo chama `/users/me`; sem token, chama endpoint público `/sites`).
 
-## Referência oficial usada
+## Referências oficiais
 
 - [Authentication and Authorization (EN)](https://developers.mercadolivre.com.br/en_us/authentication-and-authorization)
 

@@ -1,36 +1,43 @@
 ---
-title: Snippets
-description: Trechos reutilizáveis de código Python para auth, items e orders.
+title: Referência · Snippets
+description: Snippets Python reutilizáveis para autenticação, anúncios e pedidos.
 tags:
   - snippets
   - python
   - reference
 ---
 
-# Snippets Reutilizáveis
+# Referência · Snippets
 
-Trechos mínimos por domínio para copiar e adaptar.
+## Para quem é esta página
 
-## Auth - trocar authorization code por token
+Para integradores que já conhecem os endpoints e precisam copiar blocos de código mínimos e confiáveis.
+
+## Como usar
+
+1. Copie o snippet mais próximo do seu caso.
+2. Ajuste variáveis de ambiente e parâmetros.
+3. Encapsule no cliente HTTP da sua aplicação.
+
+## Auth · Trocar authorization code por token
 
 ```py
 --8<-- "_snippets/auth/token_exchange.py"
 ```
 
-## Items - buscar anúncios
+## Items · Buscar anúncios
 
 ```py
 --8<-- "_snippets/items/search_items.py"
 ```
 
-## Orders - buscar pedidos
+## Orders · Buscar pedidos
 
 ```py
 --8<-- "_snippets/orders/search_orders.py"
 ```
 
-## Atalho de busca no site
+## Atalhos de produtividade no site
 
-- Pressione `S` para focar a busca rapidamente.
-- Também é possível usar `/` em navegadores que não capturam o atalho do tema.
-
+- `S`: foco na busca.
+- `/`: alternativa de foco na busca dependendo do navegador.

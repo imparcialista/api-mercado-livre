@@ -1,60 +1,74 @@
 ---
-title: Cookbook
-description: Receitas operacionais prontas para tarefas comuns da API Mercado Livre.
+title: Referência · Cookbook
+description: Receitas operacionais para fluxos comuns de integração com a API Mercado Livre.
 tags:
   - cookbook
   - operations
   - recipes
 ---
 
-# Cookbook
+# Referência · Cookbook
 
-Receitas rápidas para tarefas frequentes.
+## Para quem é esta página
 
-## 1) Obter token e validar conta
+Para programadores que precisam executar tarefas recorrentes rapidamente sem reabrir todos os capítulos.
+
+## Pré-requisitos
+
+- Variáveis de ambiente configuradas conforme cada script.
+- Python 3.11+ e dependências do projeto instaladas.
+
+## Receita 1 · Obter token e validar conta
 
 1. Execute o fluxo OAuth do capítulo 01.
-2. Teste o token:
+2. Valide o token:
 
 ```bash
 curl -H "Authorization: Bearer SEU_ACCESS_TOKEN" https://api.mercadolibre.com/users/me
 ```
 
-## 2) Exportar IDs de anúncios ativos
+Saída esperada: dados da conta autenticada em JSON.
+
+## Receita 2 · Exportar IDs de anúncios ativos
 
 ```bash
 python examples/get_user_items.py --mode offset --status active --limit 100 --max-pages 10
 ```
 
-Saída: `output/item_ids.json`.
+Saída esperada: `output/item_ids.json`.
 
-## 3) Exportar detalhes para CSV
+## Receita 3 · Exportar detalhes de anúncios para CSV
 
 ```bash
 python examples/get_items_details.py --input output/item_ids.json --batch-size 20
 ```
 
-Saídas: `output/items_details.csv` e `output/items_errors.csv`.
+Saída esperada:
+- `output/items_details.csv`
+- `output/items_errors.csv`
 
-## 4) Atualizar preço/estoque com segurança
+## Receita 4 · Atualizar preço/estoque com segurança
 
-Dry-run:
+Dry-run (recomendado antes de produção):
 
 ```bash
 python examples/update_items.py --input input/item_updates.example.json
 ```
 
-Aplicar:
+Aplicar em produção:
 
 ```bash
 python examples/update_items.py --input input/item_updates.example.json --apply
 ```
 
-## 5) Exportar pedidos pagos
+Saída esperada: `output/item_updates_results.json`.
+
+## Receita 5 · Exportar pedidos pagos
 
 ```bash
 python examples/get_orders.py --status paid --limit 50 --max-pages 5 --sort date_desc
 ```
 
-Saídas: `output/orders_raw.json` e `output/orders_summary.csv`.
-
+Saída esperada:
+- `output/orders_raw.json`
+- `output/orders_summary.csv`
