@@ -1,5 +1,7 @@
 # 03 - Buscar detalhes dos itens em lote e exportar CSV/XLSX
 
+[Docs Home](./index.md) | [Anterior: 02](./02-primeira-consulta-anuncios.md) | [Próximo: 04](./04-atualizar-preco-estoque.md)
+
 Com os IDs coletados no capítulo 02, agora vamos buscar os detalhes dos anúncios e exportar para arquivo.
 
 ## Endpoint
@@ -64,3 +66,5 @@ Saídas geradas:
 
 - [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
 - [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
+
+[Docs Home](./index.md) | [Anterior: 02](./02-primeira-consulta-anuncios.md) | [Próximo: 04](./04-atualizar-preco-estoque.md)

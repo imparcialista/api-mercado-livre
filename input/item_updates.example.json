@@ -1,0 +1,14 @@
+[
+  {
+    "item_id": "MLB1234567890",
+    "price": 129.9,
+    "available_quantity": 10
+  },
+  {
+    "item_id": "MLB1234567891",
+    "variations": [
+      {"id": 177123456789, "available_quantity": 3},
+      {"id": 177123456790, "available_quantity": 8}
+    ]
+  }
+]
