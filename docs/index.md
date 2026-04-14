@@ -28,6 +28,12 @@ Documentação prática para integração com a API do Mercado Livre, com foco e
 !!! info "Ambiente"
     Os exemplos usam Python 3.11+ e a biblioteca `requests`.
 
+## Referência rápida
+
+- [Cookbook](./cookbook.md): receitas prontas para tarefas operacionais.
+- [Snippets](./snippets.md): blocos reutilizáveis por domínio.
+- [Tags](./tags.md): navegação por assunto.
+
 ## Rodando localmente
 
 ```bash

@@ -42,6 +42,10 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.snippets:
+      base_path:
+        - docs
+      check_paths: true
 
 extra:
   social:
@@ -57,3 +61,7 @@ nav:
       - 04 Atualizar Preço e Estoque: 04-atualizar-preco-estoque.md
       - 05 Erros e Rate Limit: 05-tratamento-erros-rate-limit.md
       - 06 Consultar Pedidos: 06-consultar-pedidos.md
+  - Referência:
+      - Tags: tags.md
+      - Cookbook: cookbook.md
+      - Snippets: snippets.md
