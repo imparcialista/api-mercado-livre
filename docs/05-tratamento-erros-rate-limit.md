@@ -23,7 +23,7 @@ Para integração estável, trate erros transitórios (`429`, `5xx`, timeout) co
 
 ## Exemplo Python (cliente reutilizável)
 
-Use [meli_http_client.py](/C:/Users/Lucas/Documents/GitHub/api-mercado-livre/examples/meli_http_client.py).
+Use [meli_http_client.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/meli_http_client.py).
 
 Exemplo rápido:
 

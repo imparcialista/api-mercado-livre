@@ -44,7 +44,7 @@ Use um JSON com lista de operações, por exemplo `input/item_updates.json`:
 
 ## Exemplo Python
 
-Use o script [update_items.py](/C:/Users/Lucas/Documents/GitHub/api-mercado-livre/examples/update_items.py).
+Use o script [update_items.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/update_items.py).
 
 Variáveis de ambiente obrigatórias:
 - `ML_ACCESS_TOKEN`

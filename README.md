@@ -1,11 +1,11 @@
 # API Mercado Livre - Documentacao e exemplos em Python
 
-Este repositório agora é focado em documentação prática da API do Mercado Livre, com exemplos em Python.
+Este repositório é focado em documentação prática da API do Mercado Livre, com exemplos em Python.
 
-## Navegação da documentação
+## Site de documentação
 
-- [Trilha de docs](./docs/index.md)
-- [GitHub Pages](https://imparcialista.github.io/api-mercado-livre/)
+- Produção: [https://imparcialista.github.io/api-mercado-livre/](https://imparcialista.github.io/api-mercado-livre/)
+- Navegação local em Markdown: [docs/index.md](./docs/index.md)
 
 ## Estrutura
 
@@ -22,27 +22,30 @@ Este repositório agora é focado em documentação prática da API do Mercado L
 - `examples/meli_http_client.py`: cliente HTTP reutilizável com retry/backoff.
 - `input/item_updates.example.json`: exemplo de payload para atualização.
 
-## Começando
+## Execução local da documentação (opcional)
 
-1. Leia os guias em `docs/` na ordem.
-2. Instale dependências mínimas:
+```bash
+python -m pip install mkdocs mkdocs-material
+mkdocs serve
+```
+
+## Configuração do GitHub Pages (uma vez)
+
+1. Repositório > `Settings` > `Pages`.
+2. Em `Source`, selecione `GitHub Actions`.
+3. Faça push na `main`.
+4. Aguarde o workflow `Deploy Docs` concluir.
+
+## Exemplos Python
+
+Dependências mínimas:
 
 ```bash
 python -m pip install requests
 ```
 
-3. Dependências opcionais para XLSX:
+Dependências opcionais para XLSX:
 
 ```bash
 python -m pip install pandas openpyxl
 ```
-
-4. Execute os exemplos em `examples/` após preencher as variáveis de ambiente.
-
-## Fontes oficiais
-
-- [Register your application](https://developers.mercadolivre.com.br/en_us/products-authentication-authorization/register-your-application)
-- [Items & Searches (EN)](https://developers.mercadolivre.com.br/en_us/api-docs/items-and-searches)
-- [Itens e Buscas (PT-BR)](https://developers.mercadolivre.com.br/pt_br/itens-e-buscas)
-- [Obtenção do Access Token](https://developers.mercadolivre.com.br/pt_br/obtencao-do-access-token)
-- [Sincronização de publicações (PT-BR)](https://developers.mercadolivre.com.br/pt_br/produto-sincronizacao-de-publicacoes)

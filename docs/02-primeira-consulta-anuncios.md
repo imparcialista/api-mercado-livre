@@ -53,7 +53,7 @@ GET /users/{USER_ID}/items/search?search_type=scan&scroll_id=SEU_SCROLL_ID&limit
 
 ## Exemplo Python
 
-Use o script [get_user_items.py](/C:/Users/Lucas/Documents/GitHub/api-mercado-livre/examples/get_user_items.py).
+Use o script [get_user_items.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/get_user_items.py).
 
 Variáveis de ambiente necessárias:
 - `ML_ACCESS_TOKEN`

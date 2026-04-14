@@ -1,0 +1,27 @@
+site_name: API Mercado Livre Docs
+site_description: Documentacao e exemplos em Python para API do Mercado Livre
+site_url: https://imparcialista.github.io/api-mercado-livre/
+repo_url: https://github.com/imparcialista/api-mercado-livre
+repo_name: imparcialista/api-mercado-livre
+
+theme:
+  name: material
+  language: pt-BR
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Início: index.md
+  - 01 Criar App e Token: 01-criar-aplicativo-e-token.md
+  - 02 Primeira Consulta: 02-primeira-consulta-anuncios.md
+  - 03 Detalhes em Lote: 03-detalhes-itens-lote-exportacao.md
+  - 04 Atualizar Preço e Estoque: 04-atualizar-preco-estoque.md
+  - 05 Erros e Rate Limit: 05-tratamento-erros-rate-limit.md

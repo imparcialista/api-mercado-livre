@@ -32,7 +32,7 @@ Headers:
 
 ## Exemplo Python
 
-Use o script [get_items_details.py](/C:/Users/Lucas/Documents/GitHub/api-mercado-livre/examples/get_items_details.py).
+Use o script [get_items_details.py](https://github.com/imparcialista/api-mercado-livre/blob/main/examples/get_items_details.py).
 
 Variáveis de ambiente obrigatórias:
 - `ML_ACCESS_TOKEN`

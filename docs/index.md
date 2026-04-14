@@ -1,6 +1,6 @@
 # API Mercado Livre - Trilha de Documentação
 
-[Início do projeto](../README.md)
+[Início do projeto](https://github.com/imparcialista/api-mercado-livre)
 
 ## Navegação
 
