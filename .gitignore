@@ -4,3 +4,4 @@ registro.txt
 /__pycache__
 /examples/__pycache__
 /site
+mkdocs-serve.*.log

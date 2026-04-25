@@ -10,7 +10,7 @@ tags:
 
 ## Para quem é esta página
 
-Para leitura não linear da documentação, quando você já sabe o domínio (auth, items, orders, resiliência).
+Para leitura não linear da documentação, quando você já sabe o domínio (auth, items, orders, envios, pagamentos, webhooks).
 
 ## auth
 
@@ -26,7 +26,22 @@ Para leitura não linear da documentação, quando você já sabe o domínio (au
 ## orders
 
 - [Capítulo 06 · Consultar pedidos e exportar](./06-consultar-pedidos.md)
+- [Capítulo 07 · Envios, logística e rastreio](./07-envios-rastreio.md)
+- [Capítulo 08 · Pagamentos e conciliação](./08-pagamentos-conciliacao.md)
+
+## shipments
+
+- [Capítulo 07 · Envios, logística e rastreio](./07-envios-rastreio.md)
+
+## payments
+
+- [Capítulo 08 · Pagamentos e conciliação](./08-pagamentos-conciliacao.md)
+
+## webhooks
+
+- [Capítulo 09 · Notificações e webhooks](./09-notificacoes-webhooks.md)
 
 ## resiliencia
 
 - [Capítulo 05 · Resiliência: erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
+- [Capítulo 09 · Notificações e webhooks](./09-notificacoes-webhooks.md)

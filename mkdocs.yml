@@ -67,6 +67,9 @@ nav:
       - "Capítulo 04 · Atualizar preço e estoque com segurança": 04-atualizar-preco-estoque.md
       - "Capítulo 05 · Resiliência: erros, timeout e rate limit": 05-tratamento-erros-rate-limit.md
       - "Capítulo 06 · Consultar pedidos e exportar": 06-consultar-pedidos.md
+      - "Capítulo 07 · Envios, logística e rastreio": 07-envios-rastreio.md
+      - "Capítulo 08 · Pagamentos e conciliação": 08-pagamentos-conciliacao.md
+      - "Capítulo 09 · Notificações e webhooks": 09-notificacoes-webhooks.md
   - Referência:
       - Tags: tags.md
       - Cookbook: cookbook.md

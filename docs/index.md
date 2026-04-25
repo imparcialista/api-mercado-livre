@@ -31,10 +31,13 @@ Guia técnico para desenvolvedores que precisam integrar sistemas à API do Merc
 <div class="home-card" markdown>
 ### Resiliência
 - [Capítulo 05 · Erros, timeout e rate limit](./05-tratamento-erros-rate-limit.md)
+- [Capítulo 09 · Notificações e webhooks](./09-notificacoes-webhooks.md)
 </div>
 <div class="home-card" markdown>
-### Vendas
+### Pós-venda
 - [Capítulo 06 · Consultar pedidos e exportar](./06-consultar-pedidos.md)
+- [Capítulo 07 · Envios, logística e rastreio](./07-envios-rastreio.md)
+- [Capítulo 08 · Pagamentos e conciliação](./08-pagamentos-conciliacao.md)
 </div>
 </div>
 
@@ -45,6 +48,7 @@ Guia técnico para desenvolvedores que precisam integrar sistemas à API do Merc
 3. Aplique atualizações com segurança (capítulo 04).
 4. Endureça resiliência de produção (capítulo 05).
 5. Integre rotinas de pedidos (capítulo 06).
+6. Feche o pós-venda com envios, pagamentos e notificações (capítulos 07 a 09).
 
 ## Referência de apoio
 

@@ -72,3 +72,28 @@ python examples/get_orders.py --status paid --limit 50 --max-pages 5 --sort date
 Saída esperada:
 - `output/orders_raw.json`
 - `output/orders_summary.csv`
+
+## Receita 6 · Investigar envio de um pedido
+
+1. Consulte o pedido em `/orders/{ORDER_ID}` ou use o resultado exportado no capítulo 06.
+2. Identifique o `shipment_id` associado.
+3. Consulte o detalhe:
+
+```bash
+curl -H "Authorization: Bearer $ML_ACCESS_TOKEN" \
+  -H "x-format-new: true" \
+  "https://api.mercadolibre.com/shipments/$SHIPMENT_ID"
+```
+
+Use o capítulo 07 para decidir quais campos persistir.
+
+## Receita 7 · Processar notificação sem duplicar dados
+
+1. Receba o webhook e valide campos mínimos.
+2. Salve o payload bruto.
+3. Responda `200` rapidamente.
+4. Enfileire o processamento.
+5. Consulte o recurso indicado em `resource`.
+6. Deduplique por `topic`, `resource`, `application_id` e `sent`.
+
+Use o capítulo 09 como referência de arquitetura.
